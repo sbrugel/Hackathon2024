@@ -1,55 +1,78 @@
+body {
+    font-family: 'Roboto', sans-serif;
+    color: #333;
+    background-color: #f5f5f5;
+}
+
 .welcome-back {
-    border: 2px solid black;
-    margin-top:50px;
-    margin-right:350px;
-    margin-left: 350px;
+    border: 2px solid #333;
+    padding: 20px;
+    margin: 50px auto;
+    max-width: 600px;
+    font-size: 24px;
+    text-align: center;
+    background-color: #fff;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
 }
 
-.new_problem{
-    margin-top: 50px;
+.new_problem {
+    display: block;
+    margin: 50px auto;
+    padding: 10px 20px;
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    text-decoration: none;
+    font-size: 18px;
+    border-radius: 5px;
 }
 
-.problem-set-table th, .problem-set-table td {
+.problem-set-table {
+    margin: 20px auto;
+    width: 80%;
+    border-collapse: collapse;
+}
+
+.problem-set-table th,
+.problem-set-table td {
+    padding: 10px;
+    border: 1px solid #ddd;
+    text-align: left;
     vertical-align: middle;
-    line-height: 1.5;
 }
 
-.problem-set-table{
-    padding-top:20px;
-    margin-left: auto;
-    margin-right: auto;
+.problem-set-table th {
+    background-color: #333;
+    color: #fff;
 }
 
 .problem-set-table td {
-    padding: 2px 40px;
-    font-size:20px;
-    font-weight: 200;
-}
-.problem-set-table th {
-    padding: 10px;
-    text-decoration: underline;
-    font-size:25px;
-    font-weight: 300;
+    background-color: #fff;
 }
 
-.problems-header{
-    margin-top:70px;
+.problems-header {
+    text-align: center;
+    margin: 70px;
     text-decoration: underline;
 }
 
-h1{
+h1 {
     font-size: 60px;
-    font-weight:400;
+    font-weight: 400;
+    text-align: center;
 }
 
-h2{
+h2 {
     font-size: 40px;
-    font-weight:300;
+    font-weight: 300;
+    text-align: center;
 }
 
-p{
-    font-size:100px;
+p {
+    font-size: 18px;
+    line-height: 1.6;
 }
+
 span {
     font-size: 20px;
 }
