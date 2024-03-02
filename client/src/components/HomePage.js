@@ -41,7 +41,9 @@ function HomePage({ currentUser }) {
                     <input placeholder="Problem search..."></input>
                 </div>
                 <div classname="new-problem">
-                    <Button>Create New Problem Set</Button>
+                    <Button onClick={() => navigate("/psetmaker")}>
+                        Create New Problem Set
+                    </Button>
                 </div>
                 <Table striped bordered hover>
                     <thead>

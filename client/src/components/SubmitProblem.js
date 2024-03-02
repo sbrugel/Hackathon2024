@@ -24,17 +24,24 @@ const SubmitProblem = ({ addQuestion }) => {
             <h3>Add Question</h3>
             <Form.Label>Problem</Form.Label>
             <br />
-            <Form.Control as="textarea" rows={5} value={problem} onChange={handleProblemChange} />
+            <Form.Control
+                as="textarea"
+                rows={5}
+                value={problem}
+                onChange={handleProblemChange}
+            />
             <br />
             <Form.Label>Answer</Form.Label>
             <br />
-            <Form.Control type="number" value={answer} onChange={handleAnswerChange} />
+            <Form.Control
+                type="number"
+                value={answer}
+                onChange={handleAnswerChange}
+            />
             <br />
-            <Button onClick={submitProblem}>
-                Submit
-            </Button>
+            <Button onClick={submitProblem}>Add Question</Button>
         </div>
     );
-}
+};
 
 export default SubmitProblem;
