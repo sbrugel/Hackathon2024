@@ -105,7 +105,7 @@ function HomePage({ currentUser }) {
                         })}
                     </tbody>
                 </Table>
-                <Button className="new_problem">Create New Problem</Button>
+                <Button className="new_problem">Create New Problem Set</Button>
             </div>
         );
     }
