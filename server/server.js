@@ -168,7 +168,7 @@ app.post("/newset", async (req, res) => {
     let id = 0;
     let foundNewID = false; // TODO: this is inefficient as shit lol
     do {
-        foundNewID++;
+        id++;
         await ProblemSet.findOne({ id: id })
             .exec()
             .then((problemSet) => {
@@ -231,7 +231,7 @@ app.post("/newproblem", async (req, res) => {
     let problemID = 0;
     let foundNewID = false; // TODO: this is inefficient as shit lol
     do {
-        id++;
+        problemID++;
         await Problem.findOne({ id: problemID })
             .exec()
             .then((problem) => {
@@ -239,7 +239,8 @@ app.post("/newproblem", async (req, res) => {
             });
     } while (!foundNewID);
 
-    const problem = new Problem({ problemID, body, answer });
+    const problem = new Problem({ id: problemID, body, answer });
+    console.log(problem);
     problem
         .save()
         .then(() => {
@@ -250,7 +251,9 @@ app.post("/newproblem", async (req, res) => {
                         ...problemSet.problemIDs,
                         problemID
                     ];
-                    res.send({ message: "Problem saved!" });
+                    problemSet.save().then(() => {
+                        res.send({ message: "Problem saved!" });
+                    });
                 });
         })
         .catch((err) => {
@@ -293,7 +296,9 @@ app.post("/newleaderboardentry", async (req, res) => {
                 .exec()
                 .then((leaderboard) => {
                     leaderboard.entryIDs = [...leaderboard.entryIDs, entryID];
-                    res.send({ message: "Leaderboard entry saved!" });
+                    leaderboard.save().then(() => {
+                        res.send({ message: "Leaderboard entry saved!" });
+                    });
                 });
         })
         .catch((err) => {
@@ -323,4 +328,34 @@ app.get("/leaderboard/:i", (req, res) => {
 
 app.listen(port, () => {
     console.log("Server is now started");
+
+    // let set = {
+    //     name: "Epic gaming 2",
+    //     authorID: 2,
+    //     category: "6h grade"
+    // };
+    // axios.post("http://localhost:5000/newset", set).then((res) => {
+    //     console.log(res.data.message);
+    // });
+
+    // let problem = {
+    //     body: "What is 4+4?",
+    //     answer: 8,
+    //     setID: 2
+    // };
+    // axios.post("http://localhost:5000/newproblem", problem).then((res) => {
+    //     console.log(res.data.message);
+    // });
+
+    let lbentry = {
+        userId: 1,
+        score: 100,
+        time: 1000,
+        leaderboardID: 1
+    };
+    axios
+        .post("http://localhost:5000/newleaderboardentry", lbentry)
+        .then((res) => {
+            console.log(res.data.message);
+        });
 });

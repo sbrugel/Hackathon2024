@@ -1,11 +1,12 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import config from "../config.json";
 
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 
-import "./App.css";
+import "../App.css";
 
 const Register = ({ setLoginUser }) => {
     const navigate = useNavigate();
@@ -26,11 +27,13 @@ const Register = ({ setLoginUser }) => {
     const login = (e) => {
         const { name, password } = user;
         if (name && password) {
-            axios.post("http://localhost:5000/login", user).then((res) => {
-                alert(res.data.message);
-                setLoginUser(res.data.user);
-                // TODO: navigate("/");
-            });
+            axios
+                .post("http://localhost:" + config.PORT + "/login", user)
+                .then((res) => {
+                    alert(res.data.message + " " + config.PORT);
+                    setLoginUser(res.data.user);
+                    // TODO: navigate("/");
+                });
         } else {
             alert("Missing a field!");
         }
