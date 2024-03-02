@@ -2,9 +2,10 @@ import "./App.css";
 import React, { useState } from "react";
 import { Route, Routes } from "react-router-dom";
 
-import Register from "./Register";
-import Login from "./Login";
-import HomePage from "./homepage";
+import Register from "./components/Register";
+import Login from "./components/Login";
+import HomePage from "./components/HomePage";
+
 function App() {
     const [user, setLoginUser] = useState({});
 

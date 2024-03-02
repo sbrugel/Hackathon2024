@@ -1,4 +1,4 @@
-import "./App.css";
+import "../App.css";
 import React, { useState } from "react";
 import { Table, Button } from "react-bootstrap";
 

@@ -1,10 +1,11 @@
 import React, { useState } from "react";
 import axios from "axios";
+import config from "../config.json";
 
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 
-import "./App.css";
+import "../App.css";
 
 const Register = () => {
     const [user, setUser] = useState({
@@ -25,9 +26,11 @@ const Register = () => {
 
         const { name, password } = user;
         if (name && password) {
-            axios.post("http://localhost:5000/register", user).then((res) => {
-                alert(res.data.message);
-            });
+            axios
+                .post("http://localhost:" + config.PORT + "/register", user)
+                .then((res) => {
+                    alert(res.data.message);
+                });
         } else {
             alert("Missing a field!");
         }
