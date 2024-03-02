@@ -346,16 +346,15 @@ app.listen(port, () => {
     // axios.post("http://localhost:5000/newproblem", problem).then((res) => {
     //     console.log(res.data.message);
     // });
-
-    let lbentry = {
-        userId: 1,
-        score: 100,
-        time: 1000,
-        leaderboardID: 1
-    };
-    axios
-        .post("http://localhost:5000/newleaderboardentry", lbentry)
-        .then((res) => {
-            console.log(res.data.message);
-        });
+    // let lbentry = {
+    //     userId: 1,
+    //     score: 100,
+    //     time: 1000,
+    //     leaderboardID: 1
+    // };
+    // axios
+    //     .post("http://localhost:5000/newleaderboardentry", lbentry)
+    //     .then((res) => {
+    //         console.log(res.data.message);
+    //     });
 });
