@@ -1,0 +1,13 @@
+.problem-set-table{
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.problem-set-table td {
+    padding: 2px 50px;
+    text-align: center;
+}
+.problem-set-table th {
+    padding: 10px;
+    text-decoration: underline;
+}
