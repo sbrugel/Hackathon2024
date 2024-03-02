@@ -1,8 +1,10 @@
 import "./App.css";
-import Register from "./Register";
-import Login from "./Login";
 import React, { useState } from "react";
 import { Route, Routes } from "react-router-dom";
+
+import Register from "./Register";
+import Login from "./Login";
+import HomePage from "./homepage";
 function App() {
     const [user, setLoginUser] = useState({});
 
@@ -14,7 +16,7 @@ function App() {
                         path="/"
                         element={
                             user && user._id ? (
-                                <Register />
+                                <HomePage />
                             ) : (
                                 <Login setLoginUser={setLoginUser} />
                             )
@@ -32,6 +34,5 @@ function App() {
         </div>
     );
 }
-
 
 export default App;
