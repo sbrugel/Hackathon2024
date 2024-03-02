@@ -64,42 +64,46 @@ const Leaderboard = () => {
                         </tr>
                     </thead>
                     <tbody>
-                        {entries.map((entry, index) => {
-                            return (
-                                <tr key={entry.userId}>
-                                    <td>{index + 1}</td>
-                                    <td>
-                                        <div>
-                                            <img
-                                                src={
-                                                    users.find(
-                                                        (user) =>
-                                                            user.id ===
-                                                            entry.userId
-                                                    )?.avatarURL
-                                                }
-                                                alt="Profile"
-                                                style={{
-                                                    width: "50px",
-                                                    height: "50px",
-                                                    borderRadius: "50%"
-                                                }}
-                                            />
-                                        </div>
-                                    </td>
-                                    <td>
-                                        {
-                                            users.find(
-                                                (user) =>
-                                                    user.id === entry.userId
-                                            )?.name
-                                        }
-                                    </td>
-                                    <td>{entry.score}</td>
-                                    <td>{entry.time}</td>
-                                </tr>
-                            );
-                        })}
+                        {entries.length === 0 ? (
+                            <tr>No one's on the leaderboard yet!</tr>
+                        ) : (
+                            entries.map((entry, index) => {
+                                return (
+                                    <tr key={entry.userId}>
+                                        <td>{index + 1}</td>
+                                        <td>
+                                            <div>
+                                                <img
+                                                    src={
+                                                        users.find(
+                                                            (user) =>
+                                                                user.id ===
+                                                                entry.userId
+                                                        )?.avatarURL
+                                                    }
+                                                    alt="Profile"
+                                                    style={{
+                                                        width: "50px",
+                                                        height: "50px",
+                                                        borderRadius: "50%"
+                                                    }}
+                                                />
+                                            </div>
+                                        </td>
+                                        <td>
+                                            {
+                                                users.find(
+                                                    (user) =>
+                                                        user.id === entry.userId
+                                                )?.name
+                                            }
+                                        </td>
+                                        <td>{entry.score}</td>
+                                        <td>{entry.time}</td>
+                                    </tr>
+                                );
+                            })
+                        )}
                     </tbody>
                 </Table>
                 <Button onClick={() => navigate("/")}>Back</Button>

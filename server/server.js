@@ -202,7 +202,10 @@ app.post("/newset", async (req, res) => {
             leaderboard
                 .save()
                 .then(() => {
-                    res.send({ message: "Problem set and leaderboard saved!" });
+                    res.send({
+                        message: "Problem set and leaderboard saved!",
+                        id: id
+                    });
                 })
                 .catch((err) => {
                     res.send("ERROR: " + err);

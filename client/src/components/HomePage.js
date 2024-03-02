@@ -83,6 +83,18 @@ function HomePage({ currentUser }) {
                                         Leaderboard
                                     </Button>
                                     <td></td>
+                                    {set.authorID === currentUser.id ? (
+                                        <Button
+                                            variant="primary"
+                                            onClick={() =>
+                                                navigate(
+                                                    "/leaderboard/" + set.id
+                                                )
+                                            }
+                                        >
+                                            Edit
+                                        </Button>
+                                    ) : null}
                                 </tr>
                             );
                         })}

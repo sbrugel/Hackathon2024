@@ -6,6 +6,7 @@ import Register from "./components/Register";
 import Login from "./components/Login";
 import HomePage from "./components/HomePage";
 import Leaderboard from "./components/Leaderboard";
+import { ProblemSetMaker } from "./components/ProblemSetMaker";
 
 function App() {
     const [user, setLoginUser] = useState({});
@@ -29,6 +30,19 @@ function App() {
                         element={
                             user && user._id ? (
                                 <Leaderboard />
+                            ) : (
+                                <Login setLoginUser={setLoginUser} />
+                            )
+                        }
+                    />
+                    <Route
+                        path="/psetmaker"
+                        element={
+                            user && user._id ? (
+                                <ProblemSetMaker
+                                    currentUser={user}
+                                    editMode={false}
+                                />
                             ) : (
                                 <Login setLoginUser={setLoginUser} />
                             )
