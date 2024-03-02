@@ -61,9 +61,36 @@ function HomePage({ currentUser }) {
                                 <tr>
                                     <td>{set.name}</td>
                                     <td>
-                                        {users.find(
-                                            (user) => user.id === set.authorID
-                                        )?.name ?? "A user"}
+                                        <div
+                                            style={{
+                                                display: "flex",
+                                                alignItems: "center"
+                                            }}
+                                        >
+                                            <img
+                                                src={
+                                                    users.find(
+                                                        (user) =>
+                                                            user.id ===
+                                                            set.authorID
+                                                    )?.avatarURL
+                                                }
+                                                alt="Profile"
+                                                style={{
+                                                    width: "50px",
+                                                    height: "50px",
+                                                    borderRadius: "50%"
+                                                }}
+                                            />
+                                            <span
+                                                style={{ marginLeft: "10px" }}
+                                            >
+                                                {users.find(
+                                                    (user) =>
+                                                        user.id === set.authorID
+                                                )?.name ?? "A user"}
+                                            </span>
+                                        </div>
                                     </td>
                                     <td>{set.category}</td>
                                     <td>
