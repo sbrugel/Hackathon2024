@@ -74,16 +74,7 @@ function HomePage({ currentUser }) {
                                             Play
                                         </Button>
                                     </td>
-                                    <Button
-                                        variant="primary"
-                                        onClick={() =>
-                                            navigate("/leaderboard/" + set.id)
-                                        }
-                                    >
-                                        Leaderboard
-                                    </Button>
-                                    <td></td>
-                                    {set.authorID === currentUser.id ? (
+                                    <td>
                                         <Button
                                             variant="primary"
                                             onClick={() =>
@@ -92,9 +83,23 @@ function HomePage({ currentUser }) {
                                                 )
                                             }
                                         >
-                                            Edit
+                                            Leaderboard
                                         </Button>
-                                    ) : null}
+                                    </td>
+                                    <td>
+                                        {set.authorID === currentUser.id ? (
+                                            <Button
+                                                variant="primary"
+                                                onClick={() =>
+                                                    navigate(
+                                                        "/leaderboard/" + set.id
+                                                    )
+                                                }
+                                            >
+                                                Edit
+                                            </Button>
+                                        ) : null}
+                                    </td>
                                 </tr>
                             );
                         })}
