@@ -1,0 +1,28 @@
+.leaderboard-table {
+    margin: 20px auto;
+    width: 50%;
+    border-collapse: collapse;
+}
+
+.leaderboard-table th,
+.leaderboard-table td {
+    padding: 10px;
+    border: 1px solid #ddd;
+    text-align: left;
+    vertical-align: middle;
+}
+
+.leaderboard-table th {
+    background-color: #333;
+    color: #fff;
+}
+
+.leaderboard-table td {
+    background-color: #fff;
+}
+
+.problems-header {
+    text-align: center;
+    margin: 70px;
+    text-decoration: underline;
+}
