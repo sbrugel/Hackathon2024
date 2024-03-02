@@ -2,14 +2,14 @@ import './App.css';
 import React, {useState} from 'react'
 
 const problems = ["problem 1", "problem 2", "problem 3"];
-const creators = ["creator 1", "creator 2", "creator 3"];
+const creators = ["Leo 1", "Leo 2", "Leo 3"];
 const difficulty = ["difficulty 1", "difficulty 2", "difficulty 3"];
-
+const leaderboard = ["button 1", "button 2", "button 3"];
 
 function App() {
   return (
     <div classname="homepage">
-      <p>Welcome back user</p>
+      <p>Welcome back, Leo!</p>
       <text>Problem Set</text>
       <div classname="search-bar">
         <input placeholder="Problem search..."></input>
@@ -33,7 +33,7 @@ function App() {
       <div classname="problem-difficulty">Difficulty of problem
         <ul>
           {difficulty.map((difficulty, index) => (
-            <li key={index}>{difficulty}<button onClick={() => handleButtonClick(index)}>Click me</button></li>
+            <li key={index}>{difficulty}<button onClick={() => handleButtonClick(index)}>Play</button></li>
           ))}
 
         </ul>
@@ -43,7 +43,13 @@ function App() {
 
       </div>
       <div classname="problem-leaderboard">leaderboards
-      
+        <ul>
+          {leaderboard.map((leaderboard, index) => (
+            <li key={index}>
+              <button onClick={() => handleButtonClick(index)}>{leaderboard}</button>
+              </li>
+          ))}
+        </ul>
       </div>
 
     </div>
