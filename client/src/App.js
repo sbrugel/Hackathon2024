@@ -2,8 +2,9 @@ import './App.css';
 
 function App() {
   return (
-    <p>hello world!</p>
+    <div>hello world!</div>
   );
 }
+
 
 export default App;
