@@ -76,6 +76,7 @@ const ProblemSet = new mongoose.model("ProblemSet", problemSetSchema);
 /*
 - register
 - login
+- get all
 - get by ID
 */
 app.post("/register", (req, res) => {
@@ -145,6 +146,14 @@ app.post("/login", (req, res) => {
             } else {
                 res.send({ message: "ERROR: User doesn't exist!" });
             }
+        });
+});
+
+app.get("/users", (req, res) => {
+    User.find()
+        .exec()
+        .then((users) => {
+            res.json(users);
         });
 });
 
@@ -347,15 +356,15 @@ app.listen(port, () => {
     //     console.log(res.data.message);
     // });
 
-    let lbentry = {
-        userId: 1,
-        score: 100,
-        time: 1000,
-        leaderboardID: 1
-    };
-    axios
-        .post("http://localhost:5000/newleaderboardentry", lbentry)
-        .then((res) => {
-            console.log(res.data.message);
-        });
+    // let lbentry = {
+    //     userId: 1,
+    //     score: 100,
+    //     time: 1000,
+    //     leaderboardID: 1
+    // };
+    // axios
+    //     .post("http://localhost:5000/newleaderboardentry", lbentry)
+    //     .then((res) => {
+    //         console.log(res.data.message);
+    //     });
 });
