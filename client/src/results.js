@@ -2,7 +2,9 @@ import './App.css';
 
 function results() {
   return (
-    <div ></div>
+    <div classname="results-page">
+        Your time was:
+    </div>
   );
 }
 
