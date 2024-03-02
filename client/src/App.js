@@ -1,9 +1,9 @@
-import './App.css';
+import "./App.css";
+import Register from "./Register";
 
 function App() {
-  return (
-    <p>hello world!</p>
-  );
+    // TODO: add routes (Simon task)
+    return <Register />;
 }
 
 export default App;
