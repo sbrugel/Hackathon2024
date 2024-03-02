@@ -1,26 +1,50 @@
-import './App.css';
-import {Table} from 'react-bootstrap'
+import "./App.css";
+import React, { useState } from "react";
+import { Route, Routes } from "react-router-dom";
+
+import Register from "./components/Register";
+import Login from "./components/Login";
+import HomePage from "./components/HomePage";
+import Leaderboard from "./components/Leaderboard";
 
 function App() {
-  return (
-    <div>
-    <p>hello world!</p>
-    <div classname="results-page">
-      Results
-      <p>Congratulations you have completed the problem set!</p>
-      <Table>
-        <thead>
-          <th>Your score was:</th>
-          <th>Your time was:</th>
-        </thead>
-        <tbody>
-          <td style={{color: /*user.score*/ >= 50 ? 'green' : 'red'}}>"Score"</td>
-          <td>"Time"</td>
-        </tbody>
-      </Table>
-    </div>
-    </div>
-  );
+    const [user, setLoginUser] = useState({});
+
+    return (
+        <div className="App">
+            <div className="App">
+                <Routes>
+                    <Route
+                        path="/"
+                        element={
+                            user && user._id ? (
+                                <HomePage currentUser={user} />
+                            ) : (
+                                <Login setLoginUser={setLoginUser} />
+                            )
+                        }
+                    />
+                    <Route
+                        path="/leaderboard"
+                        element={
+                            user && user._id ? (
+                                <Leaderboard />
+                            ) : (
+                                <Login setLoginUser={setLoginUser} />
+                            )
+                        }
+                    />
+
+                    <Route exact path="/register" element={<Register />} />
+                    <Route
+                        exact
+                        path="/login"
+                        element={<Login setLoginUser={setLoginUser} />}
+                    />
+                </Routes>
+            </div>
+        </div>
+    );
 }
 
 export default App;
