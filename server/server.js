@@ -297,7 +297,7 @@ app.post("/newleaderboardentry", async (req, res) => {
             });
     } while (!foundNewID);
 
-    const entry = new LeaderboardEntry({ entryID, userId, score, time });
+    const entry = new LeaderboardEntry({ id: entryID, userId, score, time });
     entry
         .save()
         .then(() => {
@@ -312,6 +312,14 @@ app.post("/newleaderboardentry", async (req, res) => {
         })
         .catch((err) => {
             res.send("ERROR: " + err);
+        });
+});
+
+app.get("/leaderboardentries", (req, res) => {
+    LeaderboardEntry.find()
+        .exec()
+        .then((entries) => {
+            res.json(entries);
         });
 });
 
@@ -356,9 +364,10 @@ app.listen(port, () => {
     //     console.log(res.data.message);
     // });
 
-    //     userId: 1,
-    //     score: 100,
-    //     time: 1000,
+    // let lbentry = {
+    //     userId: 4,
+    //     score: 50,
+    //     time: 900,
     //     leaderboardID: 1
     // };
     // axios
