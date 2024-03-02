@@ -36,21 +36,23 @@ function HomePage({ currentUser }) {
     } else {
         return (
             <div classname="homepage">
-                <h1>Welcome back, {currentUser.name}!</h1>
+                <div className="welcome-back">
+                    <h1>Welcome back, {currentUser.name}!</h1>
+                </div>
+
+
+                <h2 className="problems-header">Problem Sets</h2>
                 <div classname="search-bar">
                     <input placeholder="Problem search..."></input>
                 </div>
-                <div classname="new-problem">
-                    <Button>Create New Problem Set</Button>
-                </div>
-                <Table striped bordered hover>
+                <Table striped bordered hover className="problem-set-table">
                     <thead>
                         <tr>
                             <th>Name</th>
                             <th>Creator</th>
                             <th>Difficulty</th>
                             <th></th>
-                            <th>Leaderboards</th>
+                            <th></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -81,11 +83,24 @@ function HomePage({ currentUser }) {
                                         Leaderboard
                                     </Button>
                                     <td></td>
+                                    {set.authorID === currentUser.id ? (
+                                        <Button
+                                            variant="primary"
+                                            onClick={() =>
+                                                navigate(
+                                                    "/leaderboard/" + set.id
+                                                )
+                                            }
+                                        >
+                                            Edit
+                                        </Button>
+                                    ) : null}
                                 </tr>
                             );
                         })}
                     </tbody>
                 </Table>
+                <Button className="new_problem">Create New Problem</Button>
             </div>
         );
     }

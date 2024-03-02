@@ -1,8 +1,13 @@
-import SubmitProblem from './SubmitProblem';
+import SubmitProblem from "./SubmitProblem";
+import axios from "axios";
 import { Form } from "react-bootstrap";
-import { useState } from 'react';
+import { useState } from "react";
+import { Button, Table } from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
+import config from "../config"; // Import the 'config' module
 
-export function ProblemSetMaker() {
+export function ProblemSetMaker({ currentUser, editMode }) {
+    const navigate = useNavigate();
     const [name, setName] = useState("");
     const [difficulty, setDifficulty] = useState("");
     const [questions, setQuestions] = useState([]);
@@ -16,19 +21,30 @@ export function ProblemSetMaker() {
     }
 
     function handleAddQuestion(problem, answer) {
-        setQuestions([...questions, {problem, answer}]);
+        setQuestions([...questions, { problem, answer }]);
     }
 
     return (
         <div>
-            <h2>Create a Problem Set</h2>
+            <h2>{editMode ? "Edit" : "Create"} a Problem Set</h2>
             <Form.Group controlId="name">
                 <Form.Label>Name</Form.Label>
-                <Form.Control type="text" value={name} onChange={handleNameChange} />
+                <br />
+                <Form.Control
+                    type="text"
+                    value={name}
+                    onChange={handleNameChange}
+                />
             </Form.Group>
+            <br />
             <Form.Group controlId="difficulty">
                 <Form.Label>Difficulty</Form.Label>
-                <Form.Control as="select" value={difficulty} onChange={handleDifficultyChange}>
+                <br />
+                <Form.Control
+                    as="select"
+                    value={difficulty}
+                    onChange={handleDifficultyChange}
+                >
                     <option value="">Select Difficulty</option>
                     <option value="1st grade">1st Grade</option>
                     <option value="2nd grade">2nd Grade</option>
@@ -45,7 +61,7 @@ export function ProblemSetMaker() {
                 </Form.Control>
             </Form.Group>
             <h3>Questions</h3>
-            <table>
+            <Table striped bordered hover>
                 <thead>
                     <th>Problem</th>
                     <th>Answer</th>
@@ -58,8 +74,48 @@ export function ProblemSetMaker() {
                         </tr>
                     ))}
                 </tbody>
-            </table>
-            <SubmitProblem addQuestion={handleAddQuestion} />
+            </Table>
+            <div style={{ border: "2px solid black" }}>
+                <SubmitProblem addQuestion={handleAddQuestion} />
+            </div>
+            <Button
+                onClick={async () => {
+                    let id = -1;
+                    const set = {
+                        name,
+                        authorID: currentUser.id,
+                        category: difficulty
+                    };
+                    await axios
+                        .post(
+                            "http://localhost:" + config.PORT + "/newset",
+                            set
+                        )
+                        .then((res) => {
+                            id = res.data.id;
+                        });
+
+                    questions.forEach((question) => {
+                        axios
+                            .post(
+                                "http://localhost:" +
+                                    config.PORT +
+                                    "/newproblem",
+                                {
+                                    problem: question.problem,
+                                    answer: question.answer,
+                                    setID: id
+                                }
+                            )
+                            .then((res) => {
+                                console.log(res.data.message);
+                                navigate("/");
+                            });
+                    });
+                }}
+            >
+                Save Problem Set
+            </Button>
         </div>
-    )
+    );
 }
