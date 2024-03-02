@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
 import Button from "react-bootstrap/Button";
@@ -6,7 +7,9 @@ import Form from "react-bootstrap/Form";
 
 import "./App.css";
 
-const Register = () => {
+const Register = ({ setLoginUser }) => {
+    const navigate = useNavigate();
+
     const [user, setUser] = useState({
         name: "",
         password: ""
@@ -20,13 +23,13 @@ const Register = () => {
         });
     };
 
-    const register = (e) => {
-        e.preventDefault();
-
+    const login = (e) => {
         const { name, password } = user;
         if (name && password) {
-            axios.post("http://localhost:5000/register", user).then((res) => {
+            axios.post("http://localhost:5000/login", user).then((res) => {
                 alert(res.data.message);
+                setLoginUser(res.data.user);
+                // TODO: navigate("/");
             });
         } else {
             alert("Missing a field!");
@@ -35,26 +38,26 @@ const Register = () => {
 
     return (
         <>
-            <h1>Create a new account...</h1>
+            <h1>Login...</h1>
             <p>
-                Already have one? <a href="/login">Login here!</a>
+                Don't have an account? <a href="/register">Register here!</a>
             </p>
             <Form>
                 <Form.Group>
                     <Form.Control
                         type="text"
-                        id="create-account-name"
+                        id="sign-in-name"
                         name="name"
                         value={user.name}
                         onChange={handleChange}
-                        autocomplete="off"
                         placeholder="Username"
+                        autocomplete="off"
                     />
                 </Form.Group>
                 <Form.Group>
                     <Form.Control
                         type="password"
-                        id="create-account-password"
+                        id="sign-in-password"
                         name="password"
                         value={user.password}
                         onChange={handleChange}
@@ -62,12 +65,17 @@ const Register = () => {
                     />
                 </Form.Group>
                 <Form.Group>
-                    <Button type="submit" onClick={register}>
-                        Register
+                    <Button
+                        type="submit"
+                        onClick={(e) => {
+                            e.preventDefault();
+                            login();
+                        }}
+                    >
+                        Login
                     </Button>
                 </Form.Group>
             </Form>
-            <Button onClick={register}>OK</Button>
         </>
     );
 };

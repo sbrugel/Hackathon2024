@@ -34,8 +34,9 @@ const userSchema = new mongoose.Schema({
 
 // Schema for an entry in the leaderboard of a problem set
 const leaderboardEntrySchema = new mongoose.Schema({
+    id: Number,
     userId: Number,
-    score: Number, // TODO: percent? points?
+    score: Number, // the percentage correct
     time: Number // TODO may need to change this type
 });
 
@@ -71,13 +72,21 @@ const Leaderboard = new mongoose.model("Leaderboard", leaderboardSchema);
 const Problem = new mongoose.model("Problem", problemSchema);
 const ProblemSet = new mongoose.model("ProblemSet", problemSetSchema);
 
+// USER ENDPOINTS
 /*
-USER ENDPOINTS
 - register
 - login
+- get by ID
 */
 app.post("/register", (req, res) => {
     const { name, password } = req.body;
+    const DEFAULT_AVATARS = [
+        "https://cdn.discordapp.com/attachments/1213546787835740180/1213549746619162624/image.png?ex=65f5e146&is=65e36c46&hm=e2fff331bd45122903d67339e257b62618d678ac1ea06d9b89317a99c78b51e9&",
+        "https://cdn.discordapp.com/attachments/1213546787835740180/1213549844107624519/image.png?ex=65f5e15d&is=65e36c5d&hm=7173786ada000063264948f2f205579cf7119629152cd3fc67562f53b9b158b7&",
+        "https://cdn.discordapp.com/attachments/1213546787835740180/1213549894929875094/image.png?ex=65f5e169&is=65e36c69&hm=35a01b3110444c8f042d39452dcab31aff5c745cc35165f647b9cea2acd42e19&",
+        "https://cdn.discordapp.com/attachments/1213546787835740180/1213550006896820224/image.png?ex=65f5e184&is=65e36c84&hm=ebc97d8d653ddafb5dcac19c547ed4e5e9b872ce616f09a8df9d8a16c9872225&",
+        "https://cdn.discordapp.com/attachments/1213546787835740180/1213550133162025000/image.png?ex=65f5e1a2&is=65e36ca2&hm=cab75c515e618261c4973cadacfc76b5d1b5df623e03227acd71f596fd534e86&"
+    ];
     User.findOne({ name: name })
         .exec()
         .then(async (user) => {
@@ -104,7 +113,10 @@ app.post("/register", (req, res) => {
                     password,
                     completedFullSets: [],
                     completedPartSets: [],
-                    avatarURL: "" // TODO: set to a random one that Conor finds
+                    avatarURL:
+                        DEFAULT_AVATARS[
+                            Math.floor(Math.random() * DEFAULT_AVATARS.length)
+                        ]
                 });
                 user.save()
                     .then(() => {
@@ -133,6 +145,179 @@ app.post("/login", (req, res) => {
             } else {
                 res.send({ message: "ERROR: User doesn't exist!" });
             }
+        });
+});
+
+app.get("/users/:i", (req, res) => {
+    User.findOne({ id: req.params.i })
+        .exec()
+        .then((entry) => {
+            res.json(entry);
+        });
+});
+
+// PROBLEM SET ENDPOINTS
+/*
+- add new (should also create a new leaderboard at the same time)
+- get all
+- get by ID
+*/
+app.post("/newset", async (req, res) => {
+    const { name, authorID, category } = req.body;
+
+    let id = 0;
+    let foundNewID = false; // TODO: this is inefficient as shit lol
+    do {
+        foundNewID++;
+        await ProblemSet.findOne({ id: id })
+            .exec()
+            .then((problemSet) => {
+                if (!problemSet) foundNewID = true;
+            });
+    } while (!foundNewID);
+
+    const problemSet = new ProblemSet({
+        id,
+        name,
+        authorID,
+        problemIDs: [],
+        category
+    });
+    problemSet
+        .save()
+        .then(() => {
+            const leaderboard = new Leaderboard({
+                id,
+                entryIDs: []
+            });
+            leaderboard
+                .save()
+                .then(() => {
+                    res.send({ message: "Problem set and leaderboard saved!" });
+                })
+                .catch((err) => {
+                    res.send("ERROR: " + err);
+                });
+        })
+        .catch((err) => {
+            res.send("ERROR: " + err);
+        });
+});
+
+app.get("/problemsets", (req, res) => {
+    ProblemSet.find()
+        .exec()
+        .then((sets) => {
+            res.json(sets);
+        });
+});
+
+app.get("/problemsets/:i", (req, res) => {
+    ProblemSet.findOne({ id: req.params.i })
+        .exec()
+        .then((set) => {
+            res.json(set);
+        });
+});
+
+// PROBLEM ENDPOINTS
+/*
+- add new problem to set
+- get by ID
+*/
+app.post("/newproblem", async (req, res) => {
+    const { body, answer, setID } = req.body;
+
+    let problemID = 0;
+    let foundNewID = false; // TODO: this is inefficient as shit lol
+    do {
+        id++;
+        await Problem.findOne({ id: problemID })
+            .exec()
+            .then((problem) => {
+                if (!problem) foundNewID = true;
+            });
+    } while (!foundNewID);
+
+    const problem = new Problem({ problemID, body, answer });
+    problem
+        .save()
+        .then(() => {
+            ProblemSet.findOne({ id: setID })
+                .exec()
+                .then((problemSet) => {
+                    problemSet.problemIDs = [
+                        ...problemSet.problemIDs,
+                        problemID
+                    ];
+                    res.send({ message: "Problem saved!" });
+                });
+        })
+        .catch((err) => {
+            res.send("ERROR: " + err);
+        });
+});
+
+app.get("/problems/:i", (req, res) => {
+    Problem.findOne({ id: req.params.i })
+        .exec()
+        .then((problem) => {
+            res.json(problem);
+        });
+});
+
+// LEADERBOARD ENTRY ENDPOINTS
+/*
+- add a new entry to a leaderboard
+- get by ID
+*/
+app.post("/newleaderboardentry", async (req, res) => {
+    const { userId, score, time, leaderboardID } = req.body;
+
+    let entryID = 0;
+    let foundNewID = false; // TODO: this is inefficient as shit lol
+    do {
+        entryID++;
+        await LeaderboardEntry.findOne({ id: entryID })
+            .exec()
+            .then((entry) => {
+                if (!entry) foundNewID = true;
+            });
+    } while (!foundNewID);
+
+    const entry = new LeaderboardEntry({ entryID, userId, score, time });
+    entry
+        .save()
+        .then(() => {
+            Leaderboard.findOne({ id: leaderboardID })
+                .exec()
+                .then((leaderboard) => {
+                    leaderboard.entryIDs = [...leaderboard.entryIDs, entryID];
+                    res.send({ message: "Leaderboard entry saved!" });
+                });
+        })
+        .catch((err) => {
+            res.send("ERROR: " + err);
+        });
+});
+
+app.get("/leaderboardentries/:i", (req, res) => {
+    LeaderboardEntry.findOne({ id: req.params.i })
+        .exec()
+        .then((entry) => {
+            res.json(entry);
+        });
+});
+
+// LEADERBOARD ENDPOINTS
+/*
+- get by ID
+*/
+app.get("/leaderboard/:i", (req, res) => {
+    Leaderboard.findOne({ id: req.params.i })
+        .exec()
+        .then((leaderboard) => {
+            res.json(leaderboard);
         });
 });
 
