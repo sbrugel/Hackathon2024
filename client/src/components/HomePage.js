@@ -40,7 +40,6 @@ function HomePage({ currentUser }) {
                     <h1>Welcome back, {currentUser.name}!</h1>
                 </div>
 
-
                 <h2 className="problems-header">Problem Sets</h2>
                 <div classname="search-bar">
                     <input placeholder="Problem search..."></input>
@@ -51,6 +50,7 @@ function HomePage({ currentUser }) {
                             <th>Name</th>
                             <th>Creator</th>
                             <th>Difficulty</th>
+                            <th></th>
                             <th></th>
                             <th></th>
                         </tr>
@@ -105,7 +105,12 @@ function HomePage({ currentUser }) {
                         })}
                     </tbody>
                 </Table>
-                <Button className="new_problem">Create New Problem Set</Button>
+                <Button
+                    className="new_problem"
+                    onClick={() => navigate("/psetmaker")}
+                >
+                    Create New Problem Set
+                </Button>
             </div>
         );
     }
