@@ -25,7 +25,7 @@ function App() {
                         }
                     />
                     <Route
-                        path="/leaderboard"
+                        path="/leaderboard/:id"
                         element={
                             user && user._id ? (
                                 <Leaderboard />

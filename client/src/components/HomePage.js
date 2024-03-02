@@ -74,7 +74,9 @@ function HomePage({ currentUser }) {
                                     </td>
                                     <Button
                                         variant="primary"
-                                        onClick={() => navigate("/leaderboard")}
+                                        onClick={() =>
+                                            navigate("/leaderboard/" + set.id)
+                                        }
                                     >
                                         Leaderboard
                                     </Button>

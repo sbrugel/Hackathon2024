@@ -1,57 +1,111 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import config from "../config"; // Import the 'config' module
+import { useParams } from "react-router-dom"; // Import the 'useParams' hook from 'react-router-dom'
+import { Table, Button } from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
 
 const Leaderboard = () => {
+    const navigate = useNavigate();
+    const { id } = useParams();
+    const [leaderboard, setLeaderboard] = useState(null);
     const [entries, setEntries] = useState([]);
+    const [users, setUsers] = useState([]);
 
     useEffect(() => {
         axios
-            .get(`http://localhost:${config.PORT}/leaderboard`) // Use 'config.PORT' to access the 'PORT' property
+            .get(`http://localhost:${config.PORT}/leaderboard/${id}`)
             .then((res) => {
-                setEntries(res.slice().sort((a, b) => a.time - b.time));
+                setLeaderboard(res.data);
             });
-    }, []);
+    }, [id]);
 
-    return (
-        <div>
-            <h2>Leaderboard</h2>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Rank</th>
-                        <th>Avatar</th>
-                        <th>Username</th>
-                        <th>Score</th>
-                        <th>Time</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {entries.map((entry, index) => (
-                        <tr key={entry.userId}>
-                            <td>{index + 1}</td>
-                            <td>
-                                <div>
-                                    <img
-                                        src={entry.avatarURL}
-                                        alt="Profile"
-                                        style={{
-                                            width: "50px",
-                                            height: "50px",
-                                            borderRadius: "50%"
-                                        }}
-                                    />
-                                </div>
-                            </td>
-                            <td>{entry.userId}</td>
-                            <td>{entry.score}</td>
-                            <td>{entry.time}</td>
+    useEffect(() => {
+        if (!leaderboard) return;
+        console.log(leaderboard);
+        axios
+            .get(`http://localhost:${config.PORT}/leaderboardentries/`)
+            .then((res) => {
+                setEntries(
+                    res.data
+                        .filter((item) =>
+                            leaderboard.entryIDs.includes(item.id)
+                        )
+                        .sort((a, b) => {
+                            if (a.score === b.score) {
+                                return a.time - b.time;
+                            }
+                            return b.score - a.score;
+                        })
+                );
+            });
+    }, [leaderboard]);
+
+    useEffect(() => {
+        axios.get(`http://localhost:${config.PORT}/users`).then((res) => {
+            setUsers(res.data);
+        });
+    }, [entries]);
+
+    if (!leaderboard && !entries && !users) {
+        return <p>Loading...</p>;
+    } else {
+        return (
+            <div>
+                <h2>Leaderboard</h2>
+                <Table striped bordered hover>
+                    <thead>
+                        <tr>
+                            <th>Rank</th>
+                            <th>User</th>
+                            <th></th>
+                            <th>Score</th>
+                            <th>Time</th>
                         </tr>
-                    ))}
-                </tbody>
-            </table>
-        </div>
-    );
+                    </thead>
+                    <tbody>
+                        {entries.map((entry, index) => {
+                            return (
+                                <tr key={entry.userId}>
+                                    <td>{index + 1}</td>
+                                    <td>
+                                        <div>
+                                            <img
+                                                src={
+                                                    users.find(
+                                                        (user) =>
+                                                            user.id ===
+                                                            entry.userId
+                                                    )?.avatarURL
+                                                }
+                                                alt="Profile"
+                                                style={{
+                                                    width: "50px",
+                                                    height: "50px",
+                                                    borderRadius: "50%"
+                                                }}
+                                            />
+                                        </div>
+                                    </td>
+                                    <td>
+                                        {
+                                            users.find(
+                                                (user) =>
+                                                    user.id === entry.userId
+                                            )?.name
+                                        }
+                                    </td>
+                                    <td>{entry.score}</td>
+                                    <td>{entry.time}</td>
+                                </tr>
+                            );
+                        })}
+                    </tbody>
+                </Table>
+                <Button onClick={() => navigate("/")}>Back</Button>
+            </div>
+        );
+    }
 };
 
 export default Leaderboard;
