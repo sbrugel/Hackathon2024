@@ -1,7 +1,18 @@
-import React from "react"
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+import config from "../config"; // Import the 'config' module
 
-const Leaderboard = ({ entries }) => {
-    const sortedEntries =   entries.slice().sort((a, b) => a.time - b.time);
+const Leaderboard = () => {
+    const [entries, setEntries] = useState([]);
+
+    useEffect(() => {
+        axios
+            .get(`http://localhost:${config.PORT}/leaderboard`) // Use 'config.PORT' to access the 'PORT' property
+            .then((res) => {
+                setEntries(res.slice().sort((a, b) => a.time - b.time));
+            });
+    }, []);
+
     return (
         <div>
             <h2>Leaderboard</h2>
@@ -16,12 +27,20 @@ const Leaderboard = ({ entries }) => {
                     </tr>
                 </thead>
                 <tbody>
-                    {sortedEntries.map((entry, index) => (
+                    {entries.map((entry, index) => (
                         <tr key={entry.userId}>
                             <td>{index + 1}</td>
                             <td>
                                 <div>
-                                    <img src={entry.avatarURL} alt="Profile" style={{ width: '50px', height: '50px', borderRadius: '50%' }} />
+                                    <img
+                                        src={entry.avatarURL}
+                                        alt="Profile"
+                                        style={{
+                                            width: "50px",
+                                            height: "50px",
+                                            borderRadius: "50%"
+                                        }}
+                                    />
                                 </div>
                             </td>
                             <td>{entry.userId}</td>
@@ -33,6 +52,6 @@ const Leaderboard = ({ entries }) => {
             </table>
         </div>
     );
-}
+};
 
 export default Leaderboard;

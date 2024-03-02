@@ -1,8 +1,10 @@
 import "../App.css";
-import axios from "axios";
 import config from "../config";
-import { Table, Button } from "react-bootstrap";
+
 import React, { useState, useEffect } from "react";
+import { Table, Button } from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 const handleButtonClick = (rowIndex) => {
     // Handle button click for the specific row (index) here
@@ -10,6 +12,7 @@ const handleButtonClick = (rowIndex) => {
 };
 
 function HomePage({ currentUser }) {
+    const navigate = useNavigate();
     const [problemSets, setProblemSets] = useState([]);
     const [users, setUsers] = useState([]);
     // ...
@@ -70,7 +73,7 @@ function HomePage({ currentUser }) {
                                     </td>
                                     <Button
                                         variant="primary"
-                                        onClick={() => handleButtonClick(0)}
+                                        onClick={() => navigate("/leaderboard")}
                                     >
                                         Leaderboard
                                     </Button>
