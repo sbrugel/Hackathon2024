@@ -7,6 +7,7 @@ import Login from "./components/Login";
 import HomePage from "./components/HomePage";
 import Leaderboard from "./components/Leaderboard";
 import { ProblemSetMaker } from "./components/ProblemSetMaker";
+import Forum from "./components/Forum";
 
 function App() {
     const [user, setLoginUser] = useState({});
@@ -21,7 +22,8 @@ function App() {
                             user && user._id ? (
                                 <HomePage currentUser={user} />
                             ) : (
-                                <Login setLoginUser={setLoginUser} />
+                                //<Login setLoginUser={setLoginUser} />
+                                <Forum/>
                             )
                         }
                     />
