@@ -46,18 +46,18 @@ export function ProblemSetMaker({ currentUser, editMode }) {
                     onChange={handleDifficultyChange}
                 >
                     <option value="">Select Difficulty</option>
-                    <option value="1st grade">1st Grade</option>
-                    <option value="2nd grade">2nd Grade</option>
-                    <option value="3rd grade">3rd Grade</option>
-                    <option value="4th grade">4th Grade</option>
-                    <option value="5th grade">5th Grade</option>
-                    <option value="6th grade">6th Grade</option>
-                    <option value="7th grade">7th Grade</option>
-                    <option value="8th grade">8th Grade</option>
-                    <option value="9th grade">9th Grade</option>
-                    <option value="10th grade">10th Grade</option>
-                    <option value="11th grade">11th Grade</option>
-                    <option value="12th grade">12th Grade</option>
+                    <option value="1st Grade">1st Grade</option>
+                    <option value="2nd Grade">2nd Grade</option>
+                    <option value="3rd Grade">3rd Grade</option>
+                    <option value="4th Grade">4th Grade</option>
+                    <option value="5th Grade">5th Grade</option>
+                    <option value="6th Grade">6th Grade</option>
+                    <option value="7th Grade">7th Grade</option>
+                    <option value="8th Grade">8th Grade</option>
+                    <option value="9th Grade">9th Grade</option>
+                    <option value="10th Grade">10th Grade</option>
+                    <option value="11th Grade">11th Grade</option>
+                    <option value="12th Grade">12th Grade</option>
                 </Form.Control>
             </Form.Group>
             <h3>Questions</h3>

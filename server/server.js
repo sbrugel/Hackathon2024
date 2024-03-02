@@ -252,7 +252,6 @@ app.post("/newproblem", async (req, res) => {
     } while (!foundNewID);
 
     const problem = new Problem({ id: problemID, body, answer });
-    console.log(problem);
     problem
         .save()
         .then(() => {
@@ -348,34 +347,4 @@ app.get("/leaderboard/:i", (req, res) => {
 
 app.listen(port, () => {
     console.log("Server is now started");
-
-    // let set = {
-    //     name: "Epic gaming 2",
-    //     authorID: 2,
-    //     category: "6h grade"
-    // };
-    // axios.post("http://localhost:5000/newset", set).then((res) => {
-    //     console.log(res.data.message);
-    // });
-
-    // let problem = {
-    //     body: "What is 4+4?",
-    //     answer: 8,
-    //     setID: 2
-    // };
-    // axios.post("http://localhost:5000/newproblem", problem).then((res) => {
-    //     console.log(res.data.message);
-    // });
-
-    // let lbentry = {
-    //     userId: 4,
-    //     score: 50,
-    //     time: 900,
-    //     leaderboardID: 1
-    // };
-    // axios
-    //     .post("http://localhost:5000/newleaderboardentry", lbentry)
-    //     .then((res) => {
-    //         console.log(res.data.message);
-    //     });
 });
