@@ -1,9 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './ProblemView.css';
 
 function ProblemView({ problems }) {
   const [currentProblemIndex, setCurrentProblemIndex] = useState(0);
   const [userAnswer, setUserAnswer] = useState('');
+  const [elapsedTime, setElapsedTime] = useState(0);
 
   const handleAnswerSubmit = (event) => {
     event.preventDefault();
@@ -12,6 +13,31 @@ function ProblemView({ problems }) {
     }
     setUserAnswer('');
   };
+
+  const startStopwatch = () => {
+    setElapsedTime(0);
+    const intervalId = setInterval(() => {
+      setElapsedTime(prevElapsedTime => prevElapsedTime + 1);
+    }, 1000);
+    return intervalId;
+  };
+
+  const stopStopwatch = (intervalId) => {
+    clearInterval(intervalId);
+  };
+
+  const formatTime = (time) => {
+    const minutes = Math.floor(time / 60);
+    const seconds = time % 60;
+    return `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`
+}
+
+  useEffect(() => {
+    const intervalId = startStopwatch();
+    return () => {
+      stopStopwatch(intervalId);
+    };
+  }, []);
 
   return (
     <div>
@@ -22,8 +48,9 @@ function ProblemView({ problems }) {
           value={userAnswer}
           onChange={(e) => setUserAnswer(e.target.value)}
         />
+        <p>Press Enter to Submit</p>
         </form>
-          <p>Press Enter to Submit</p>
+        <p>Time: {formatTime(elapsedTime)}</p>
     </div>
   );
 }
