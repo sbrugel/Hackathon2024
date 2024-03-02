@@ -33,7 +33,7 @@ const Leaderboard = () => {
                             leaderboard.entryIDs.includes(item.id)
                         )
                         .sort((a, b) => {
-                            return a.time - b.time
+                            return a.time - b.time;
                         })
                 );
             });
@@ -68,7 +68,12 @@ const Leaderboard = () => {
                                     <tr key={entry.userId}>
                                         <td>{index + 1}</td>
                                         <td>
-                                            <div>
+                                            <div
+                                                style={{
+                                                    display: "flex",
+                                                    alignItems: "center"
+                                                }}
+                                            >
                                                 <img
                                                     src={
                                                         users.find(
@@ -84,12 +89,17 @@ const Leaderboard = () => {
                                                         borderRadius: "50%"
                                                     }}
                                                 />
-                                            {
-                                                users.find(
-                                                    (user) =>
-                                                        user.id === entry.userId
-                                                )?.name
-                                            }
+                                                <span
+                                                    style={{
+                                                        marginLeft: "10px"
+                                                    }}
+                                                >
+                                                    {users.find(
+                                                        (user) =>
+                                                            user.id ===
+                                                            entry.userId
+                                                    )?.name ?? "A user"}
+                                                </span>
                                             </div>
                                         </td>
                                         <td>{entry.time}</td>
