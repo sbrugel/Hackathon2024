@@ -20,3 +20,11 @@
     font-size: 18px;
     border-radius: 11px;
 }
+
+.mainproblemview {
+    display: flex !important;
+    flex-direction: column; /* Add this line to stack items vertically */
+    justify-content: center !important;
+    align-items: center !important;
+    height: 100vh !important;
+}

@@ -2,13 +2,16 @@ import React, { useState, useEffect } from "react";
 import "./ProblemView.css";
 import { useNavigate } from "react-router-dom";
 import { useParams } from "react-router-dom";
+import useWindowSize from "react-use/lib/useWindowSize";
 import config from "../config"; // Import the 'config' module
 import axios from "axios"; // Import the 'axios' module
 import { Button } from "react-bootstrap";
+import Confetti from "react-confetti";
 
 function ProblemView({ currentUser }) {
     const navigate = useNavigate();
     const { id } = useParams();
+    const { width, height } = useWindowSize();
 
     const [problemSet, setProblemSet] = useState(null);
     const [allProblems, setAllProblems] = useState([]);
@@ -92,7 +95,7 @@ function ProblemView({ currentUser }) {
     else {
         if (!finished) {
             return (
-                <div>
+                <div className="mainproblemview">
                     <h1>
                         {problems[currentProblemIndex]
                             ? problems[currentProblemIndex].body
@@ -111,7 +114,8 @@ function ProblemView({ currentUser }) {
             );
         } else {
             return (
-                <div>
+                <div className="mainproblemview">
+                    <Confetti width={width} height={height} />
                     <h1>Well done!</h1>
                     <p>
                         You completed the problem set in {finalTime} seconds.
