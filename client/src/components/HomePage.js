@@ -105,7 +105,7 @@ function HomePage({ currentUser }) {
                                     </td>
                                     <td>{set.category}</td>
                                     <td>
-                                        <Button
+                                        <Button className="play-button"
                                             variant="primary"
                                             onClick={() => handleButtonClick(0)}
                                         >
@@ -113,7 +113,7 @@ function HomePage({ currentUser }) {
                                         </Button>
                                     </td>
                                     <td>
-                                        <Button
+                                        <Button className="leaderboard-button"
                                             variant="primary"
                                             onClick={() =>
                                                 navigate(
@@ -126,7 +126,7 @@ function HomePage({ currentUser }) {
                                     </td>
                                     <td>
                                         {set.authorID === currentUser.id ? (
-                                            <Button
+                                            <Button className = "edit-button"
                                                 variant="primary"
                                                 onClick={() =>
                                                     navigate(

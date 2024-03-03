@@ -24,7 +24,7 @@ body {
     text-align: center;
     text-decoration: none;
     font-size: 18px;
-    border-radius: 5px;
+    border-radius: 11px;
 }
 
 .problem-set-table {
@@ -75,4 +75,48 @@ p {
 
 span {
     font-size: 20px;
+}
+
+.play-button,
+.leaderboard-button {
+    display: block;
+    margin: 0 auto;
+    padding: 10px 20px;
+    background-color: #0ca002;
+    color: #fff;
+    text-align: center;
+    font-size: 18px;
+    border-radius: 11px;
+    transition: background-color 0.3s ease;
+    outline: none;
+    justify-content: center;
+}
+
+.edit-button {
+    display: block;
+    margin: 0 auto;
+    padding: 10px 20px;
+    background-color: #c4d31f;
+    color: #fff;
+    text-align: center;
+    font-size: 18px;
+    border-radius: 11px;
+    transition: background-color 0.3s ease;
+    outline: none;
+    justify-content: center;
+}
+.edit-button:hover {
+    background-color: #b8e829;
+}
+
+.play-button:hover {
+    background-color: #03c000;
+}
+
+.leaderboard-button {
+    background-color: #0b56a7;
+}
+
+.leaderboard-button:hover {
+    background-color: #036ad8;
 }
