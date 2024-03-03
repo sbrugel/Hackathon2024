@@ -96,12 +96,13 @@ function ProblemView({ currentUser }) {
         if (!finished) {
             return (
                 <div className="mainproblemview">
-                    <h1>
-                        {problems[currentProblemIndex]
-                            ? problems[currentProblemIndex].body
-                            : "..."}
-                    </h1>
-                    <form onSubmit={handleAnswerSubmit}>
+                    <div className ="container">
+                        <h1>
+                            {problems[currentProblemIndex]
+                                ? problems[currentProblemIndex].body
+                                : "..."}
+                        </h1>
+                        <form onSubmit={handleAnswerSubmit}>
                         <input
                             type="number"
                             value={userAnswer}
@@ -115,38 +116,43 @@ function ProblemView({ currentUser }) {
                             onChange={(e) => setUserAnswer(e.target.value)}
                         />
                         <p>Press Enter to Submit</p>
-                    </form>
-                    <p>Time: {formatTime(elapsedTime)}</p>
+                        </form>
+                        <p>Time: {formatTime(elapsedTime)}</p>
+                    </div>
                 </div>
             );
         } else {
             return (
                 <div className="mainproblemview">
-                    <Confetti width={width} height={height} />
-                    <h1>Well done!</h1>
-                    <p>
-                        You completed the problem set in {finalTime} seconds.
-                        We'll submit your results to the leaderboard now.
-                    </p>
-                    <Button
-                        className="new_problem"
-                        onClick={async () => {
-                            await axios
-                                .post(
-                                    `http://localhost:${config.PORT}/newleaderboardentry`,
-                                    {
-                                        userId: currentUser.id,
-                                        time: finalTime,
-                                        leaderboardID: id
-                                    }
-                                )
-                                .then(() => {
-                                    navigate(`/leaderboard/${id}`);
-                                });
-                        }}
-                    >
-                        OK
-                    </Button>
+                    <div className = "container">
+                        <Confetti width={width} height={height} />
+                        <h1 style={{marginBottom:"100px"}}>Well done!</h1>
+                        <p>
+                            You completed the problem set in {finalTime} seconds.
+                        </p>
+                        <p>
+                            We'll submit your results to the leaderboard now.
+                        </p>
+                        <Button
+                            className="new_problem"
+                            onClick={async () => {
+                                await axios
+                                    .post(
+                                        `http://localhost:${config.PORT}/newleaderboardentry`,
+                                        {
+                                            userId: currentUser.id,
+                                            time: finalTime,
+                                            leaderboardID: id
+                                        }
+                                    )
+                                    .then(() => {
+                                        navigate(`/leaderboard/${id}`);
+                                    });
+                            }}
+                        >
+                            OK
+                        </Button>
+                    </div>
                 </div>
             );
         }
