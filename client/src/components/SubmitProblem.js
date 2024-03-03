@@ -1,5 +1,6 @@
 import { Form, Button } from "react-bootstrap";
 import { useState } from "react";
+import "./SubmitProblem.css";
 
 const SubmitProblem = ({ addQuestion }) => {
     const [problem, setProblem] = useState("");
@@ -39,7 +40,7 @@ const SubmitProblem = ({ addQuestion }) => {
                 onChange={handleAnswerChange}
             />
             <br />
-            <Button onClick={submitProblem}>Add Question</Button>
+            <Button style={{backgroundColor:"green"}} onClick={submitProblem}>Add Question</Button>
         </div>
     );
 };
