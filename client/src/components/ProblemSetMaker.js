@@ -29,24 +29,27 @@ export function ProblemSetMaker({ currentUser, editMode }) {
         <div className="problem-set-maker">
             <h2>{editMode ? "Edit" : "Create"} a Problem Set</h2>
             <Form.Group controlId="name">
-                <Form.Label>Name</Form.Label>
+                <Form.Label className="label">Name of Set</Form.Label>
                 <br />
                 <Form.Control
                     type="text"
                     value={name}
                     onChange={handleNameChange}
+                    style={{ width: "60%", textAlign: "center", fontSize: "25px", margin: "0 auto", padding: "10px 20px", height: "20px"}}
                 />
             </Form.Group>
             <br />
             <Form.Group controlId="difficulty">
-                <Form.Label>Difficulty</Form.Label>
+                <Form.Label className ="label">Difficulty</Form.Label>
                 <br />
                 <Form.Control
                     as="select"
                     value={difficulty}
                     onChange={handleDifficultyChange}
+                style={{ width: "60%", textAlign: "center", fontSize: "15px", margin: "0 auto", padding: "10px 20px", borderRadius: "10px", height: "50px"}}
+
                 >
-                    <option value="">Select Difficulty</option>
+                    <option value="">Select Difficulty...</option>
                     <option value="1st Grade">1st Grade</option>
                     <option value="2nd Grade">2nd Grade</option>
                     <option value="3rd Grade">3rd Grade</option>
@@ -81,7 +84,20 @@ export function ProblemSetMaker({ currentUser, editMode }) {
                     ))}
                 </tbody>
             </Table>
-            <Button style = {{backgroundColor: "green"}}
+            <Button style={{
+                display: "block",
+                margin: "0 auto",
+                padding: "10px 20px",
+                backgroundColor: "#0ca002",
+                color: "#fff",
+                textAlign: "center",
+                fontSize: "18px",
+                borderRadius: "11px",
+                transition: "background-color 0.3s ease",
+                outline: "none",
+                justifyContent: "center",
+                width: "35%"
+            }} 
                 onClick={async () => {
                     let id = -1;
                     const set = {

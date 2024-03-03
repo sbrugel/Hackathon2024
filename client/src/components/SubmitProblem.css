@@ -1,4 +1,17 @@
 .add-problem{
-    background-color: green;
-    color:white;
+    display: block;
+    margin: 0 auto;
+    padding: 10px 20px;
+    background-color: #0ca002;
+    color: #fff;
+    text-align: center;
+    font-size: 18px;
+    border-radius: 11px;
+    transition: background-color 0.3s ease;
+    outline: none;
+    justify-content: center;
+}
+
+.add-problem:hover{
+    background-color: #03c000;
 }

@@ -4,10 +4,10 @@ body {
     background-color: #f5f5f5;
 }
 
-.add-problem{
-    background-color: chartreuse;
-}
 
+.label {
+    font-size: 25px;
+}
 .problem-set-maker {
     max-width: 600px;
     margin: 50px auto;
