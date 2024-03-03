@@ -4,7 +4,8 @@ import { Form } from "react-bootstrap";
 import { useState } from "react";
 import { Button, Table } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
-import config from "../config"; // Import the 'config' module
+import config from "../config";
+import "./ProblemSetMaker.css";
 
 export function ProblemSetMaker({ currentUser, editMode }) {
     const navigate = useNavigate();
@@ -25,7 +26,7 @@ export function ProblemSetMaker({ currentUser, editMode }) {
     }
 
     return (
-        <div>
+        <div className="problem-set-maker">
             <h2>{editMode ? "Edit" : "Create"} a Problem Set</h2>
             <Form.Group controlId="name">
                 <Form.Label>Name</Form.Label>
@@ -60,7 +61,12 @@ export function ProblemSetMaker({ currentUser, editMode }) {
                     <option value="12th Grade">12th Grade</option>
                 </Form.Control>
             </Form.Group>
-            <h3>Questions</h3>
+            
+            <div>
+                <SubmitProblem addQuestion={handleAddQuestion} />
+            </div>
+            
+            <h3>Questions In Set</h3>
             <Table striped bordered hover>
                 <thead>
                     <th>Problem</th>
@@ -75,10 +81,7 @@ export function ProblemSetMaker({ currentUser, editMode }) {
                     ))}
                 </tbody>
             </Table>
-            <div style={{ border: "2px solid black" }}>
-                <SubmitProblem addQuestion={handleAddQuestion} />
-            </div>
-            <Button
+            <Button style = {{backgroundColor: "green"}}
                 onClick={async () => {
                     let id = -1;
                     const set = {
