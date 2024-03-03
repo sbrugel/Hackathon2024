@@ -1,6 +1,8 @@
 import "./App.css";
 import React, { useState } from "react";
 import { Route, Routes } from "react-router-dom";
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 import Register from "./components/Register";
 import Login from "./components/Login";
@@ -30,7 +32,10 @@ function App() {
                         path="/game/:id"
                         element={
                             user && user._id ? (
+                              <div>
                                 <ProblemView currentUser={user} />
+                                <ToastContainer />
+                              </div>
                             ) : (
                                 <Login setLoginUser={setLoginUser} />
                             )
