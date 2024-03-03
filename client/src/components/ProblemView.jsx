@@ -10,6 +10,7 @@ import Confetti from "react-confetti";
 const checkerFlag = require("../assets/flag.gif");
 const correct = new Audio(require("../assets/correct.mp3"));
 const incorrect = new Audio(require("../assets/incorrect.mp3"));
+let currentlyPlayingAudio;
 
 function ProblemView({ currentUser }) {
     const navigate = useNavigate();
@@ -60,17 +61,26 @@ function ProblemView({ currentUser }) {
     const [userAnswer, setUserAnswer] = useState("");
     const [elapsedTime, setElapsedTime] = useState(0);
 
+    function playAudio(audio) {
+        if(currentlyPlayingAudio) {
+            currentlyPlayingAudio.pause();
+            currentlyPlayingAudio.currentTime = 0;
+        }
+        audio.play();
+        currentlyPlayingAudio = audio;
+    }
+
     const handleAnswerSubmit = (event) => {
         event.preventDefault();
         const answer = userAnswer;
         setUserAnswer("");
         // eslint-disable-next-line eqeqeq
         if (answer == problems[currentProblemIndex].answer) {
-            correct.play();
+            playAudio(correct);
             setCurrentProblemIndex(currentProblemIndex + 1);
 
         } else {
-            incorrect.play();
+            playAudio(incorrect);
         }
         if (currentProblemIndex >= problems.length - 1) {
             correct.play();
