@@ -10,6 +10,7 @@ import HomePage from "./components/HomePage";
 import Leaderboard from "./components/Leaderboard";
 import { ProblemSetMaker } from "./components/ProblemSetMaker";
 import ProblemView from "./components/ProblemView";
+import Forum from "./components/Forum";
 
 function App() {
     const [user, setLoginUser] = useState({});
@@ -64,7 +65,16 @@ function App() {
                             )
                         }
                     />
-
+                    <Route
+                        path="/forum"
+                        element={
+                            user && user._id ? (
+                                <Forum currentUser={user} />
+                            ) : (
+                                <Login setLoginUser={setLoginUser} />
+                            )
+                        }
+                    />
                     <Route exact path="/register" element={<Register />} />
                     <Route
                         exact

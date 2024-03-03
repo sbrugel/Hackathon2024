@@ -62,6 +62,21 @@ const problemSetSchema = new mongoose.Schema({
     category: String // grade level, will be implemented in front end.
 });
 
+const forumPostSchema = new mongoose.Schema({
+    id: Number,
+    authorID: Number,
+    body: String,
+    postTime: Date
+});
+
+const forumTopicSchema = new mongoose.Schema({
+    id: Number,
+    originalAuthorID: Number,
+    title: String,
+    postIDs: [Number],
+    postTime: Date
+});
+
 // Models
 const User = new mongoose.model("User", userSchema);
 const LeaderboardEntry = new mongoose.model(
@@ -71,6 +86,8 @@ const LeaderboardEntry = new mongoose.model(
 const Leaderboard = new mongoose.model("Leaderboard", leaderboardSchema);
 const Problem = new mongoose.model("Problem", problemSchema);
 const ProblemSet = new mongoose.model("ProblemSet", problemSetSchema);
+const ForumPost = new mongoose.model("ForumPost", forumPostSchema);
+const ForumTopic = new mongoose.model("ForumTopic", forumTopicSchema);
 
 // USER ENDPOINTS
 /*
@@ -342,6 +359,94 @@ app.get("/leaderboard/:i", (req, res) => {
         .exec()
         .then((leaderboard) => {
             res.json(leaderboard);
+        });
+});
+
+// FORUM TOPIC ENDPOINTS
+/*
+- add new
+- get all
+*/
+app.post("/topic", async (req, res) => {
+    const { originalAuthorID, title } = req.body;
+
+    let id = 0;
+    let foundNewID = false; // TODO: this is inefficient as shit lol
+    do {
+        id++;
+        await ForumTopic.findOne({ id: id })
+            .exec()
+            .then((topic) => {
+                if (!topic) foundNewID = true;
+            });
+    } while (!foundNewID);
+
+    const forumTopic = new ForumTopic({
+        id,
+        originalAuthorID,
+        title,
+        postIDs: [],
+        postTime: Date.now()
+    });
+    forumTopic
+        .save()
+        .then(() => {
+            res.end({ message: "New topic created!" });
+        })
+        .catch((err) => {
+            res.send("ERROR: " + err);
+        });
+});
+
+app.get("/topics", (req, res) => {
+    ForumTopic.find()
+        .exec()
+        .then((topics) => {
+            res.json(topics);
+        });
+});
+
+// FORUM POST ENDPOINTS
+/*
+- add new to topic
+- get all
+*/
+app.post("/newpost", async (req, res) => {
+    const { authorID, body, threadID } = req.body;
+
+    let postID = Math.floor(Math.random() * 10000000);
+
+    const post = new ForumPost({
+        id: postID,
+        authorID,
+        body,
+        postTime: Date.now()
+    });
+
+    post.save()
+        .then(() => {
+            return ForumTopic.findOne({ id: threadID }).exec();
+        })
+        .then((topic) => {
+            if (!topic) {
+                throw new Error("topic not found");
+            }
+            topic.postIDs.push(postID);
+            return topic.save();
+        })
+        .then(() => {
+            res.send({ message: "Post saved!" });
+        })
+        .catch((err) => {
+            res.send("ERROR: " + err);
+        });
+});
+
+app.get("/posts", (req, res) => {
+    ForumPost.find()
+        .exec()
+        .then((posts) => {
+            res.json(posts);
         });
 });
 
