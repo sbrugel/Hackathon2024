@@ -30,7 +30,7 @@ function App() {
                         path="/game/:id"
                         element={
                             user && user._id ? (
-                                <ProblemView />
+                                <ProblemView currentUser={user} />
                             ) : (
                                 <Login setLoginUser={setLoginUser} />
                             )
