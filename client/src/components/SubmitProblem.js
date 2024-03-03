@@ -15,9 +15,13 @@ const SubmitProblem = ({ addQuestion }) => {
     }
 
     function submitProblem() {
-        console.log(problem);
-        console.log(answer);
-        addQuestion(problem, answer);
+        if(problem && answer){
+            console.log(problem);
+            console.log(answer);
+            addQuestion(problem, answer);
+        } else {
+            alert("Missing a field");
+        }
     }
 
     return (
