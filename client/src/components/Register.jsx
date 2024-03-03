@@ -6,6 +6,7 @@ import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 
 import "../App.css";
+import "./Register.css";
 
 const Register = () => {
     const [user, setUser] = useState({
@@ -38,56 +39,60 @@ const Register = () => {
 
     return (
         <>
-            <h1>Create a new account...</h1>
-            <p>
-                Already have one? <a href="/">Login here!</a>
-            </p>
-            <Form>
-                <Form.Group>
-                    <Form.Control
-                        type="text"
-                        id="create-account-name"
-                        name="name"
-                        value={user.name}
-                        onChange={handleChange}
-                        autocomplete="off"
-                        placeholder="Username"
-                        style={{
-                            width: "30%",
-                            textAlign: "center",
-                            fontSize: "25px",
-                            padding: "10px 20px",
-                            height: "20px"
-                        }}
-                    />
-                </Form.Group>
-                <Form.Group>
-                    <Form.Control
-                        type="password"
-                        id="create-account-password"
-                        name="password"
-                        value={user.password}
-                        onChange={handleChange}
-                        placeholder="Password"
-                        style={{
-                            width: "30%",
-                            textAlign: "center",
-                            fontSize: "25px",
-                            padding: "10px 20px",
-                            height: "20px"
-                        }}
-                    />
-                </Form.Group>
-                <Form.Group>
-                    <Button
-                        type="submit"
-                        className="new_problem"
-                        onClick={register}
-                    >
-                        Register
-                    </Button>
-                </Form.Group>
-            </Form>
+            <div className = "container">
+                <h1 className= "register_header">Create a new account!</h1>
+                <Form>
+                    <Form.Group>
+                        <Form.Control
+                            type="text"
+                            id="create-account-name"
+                            name="name"
+                            value={user.name}
+                            onChange={handleChange}
+                            autocomplete="off"
+                            placeholder="Username"
+                            style={{
+                                marginTop:"40px",
+                                width: "50%",
+                                textAlign: "left",
+                                fontSize: "20px",
+                                padding: "10px 20px",
+                                height: "20px"
+                            }}
+                        />
+                    </Form.Group>
+                    <Form.Group>
+                        <Form.Control
+                            type="password"
+                            id="create-account-password"
+                            name="password"
+                            value={user.password}
+                            onChange={handleChange}
+                            placeholder="Password"
+                            style={{
+                                marginTop:"10px",
+                                width: "50%",
+                                textAlign: "left",
+                                fontSize: "20px",
+                                padding: "10px 20px",
+                                height: "20px"
+                            }}
+                        />
+                    </Form.Group>
+                    <Form.Group>
+                        <Button
+                            type="submit"
+                            className="new_problem"
+                            onClick={register}
+                        >
+                            Register
+                        </Button>
+                    </Form.Group>
+                </Form>
+                <p>
+                    Already have one? <a href="/">Login here!</a>
+                </p>
+            </div>
         </>
     );
 };
