@@ -1,0 +1,17 @@
+.container{
+    background-color: #ffffff;
+    border-radius:11px;
+    margin-top: 200px;
+    margin-right: auto;
+    margin-left:auto;
+    outline:1px solid black;
+}
+
+.login_header{
+    font-weight:700;
+}
+
+a {
+    color: #007BFF;
+    text-decoration: none;
+}

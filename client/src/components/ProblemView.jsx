@@ -96,7 +96,7 @@ function ProblemView({ currentUser }) {
         if (!finished) {
             return (
                 <div className="mainproblemview">
-                    <div className ="container">
+                    <div className ="problem_container">
                         <h1>
                             {problems[currentProblemIndex]
                                 ? problems[currentProblemIndex].body
@@ -114,17 +114,17 @@ function ProblemView({ currentUser }) {
                                 height: "20px"
                             }}
                             onChange={(e) => setUserAnswer(e.target.value)}
-                        />
+                            />
+                        <p>Time: {formatTime(elapsedTime)}</p>
                         <p>Press Enter to Submit</p>
                         </form>
-                        <p>Time: {formatTime(elapsedTime)}</p>
                     </div>
                 </div>
             );
         } else {
             return (
                 <div className="mainproblemview">
-                    <div className = "container">
+                    <div className = "problem_container">
                         <Confetti width={width} height={height} />
                         <h1 style={{marginBottom:"100px"}}>Well done!</h1>
                         <p>
