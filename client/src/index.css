@@ -11,7 +11,7 @@ body {
         margin: 0;
     }
 
-    background-image: url(./assets/bg1.jpg);
+    background-image: url(assets/bg1.jpg);
     background-size: cover;
 
     input[type="number"] {

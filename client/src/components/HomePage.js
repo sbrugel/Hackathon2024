@@ -64,13 +64,18 @@ function HomePage({ currentUser }) {
                         onChange={handleSearchQueryChange}
                     ></input>
                 </div>
+                <Button
+                    className="new_problem"
+                    onClick={() => navigate("/psetmaker")}
+                >
+                    Create New Problem Set
+                </Button>
                 <Table striped bordered hover className="problem-set-table">
                     <thead>
                         <tr>
                             <th>Name</th>
                             <th>Creator</th>
                             <th>Grade Level</th>
-                            <th></th>
                             <th></th>
                             <th></th>
                         </tr>
@@ -137,32 +142,11 @@ function HomePage({ currentUser }) {
                                             Leaderboard
                                         </Button>
                                     </td>
-                                    <td>
-                                        {set.authorID === currentUser.id ? (
-                                            <Button
-                                                className="edit-button"
-                                                variant="primary"
-                                                onClick={() =>
-                                                    navigate(
-                                                        "/leaderboard/" + set.id
-                                                    )
-                                                }
-                                            >
-                                                Edit
-                                            </Button>
-                                        ) : null}
-                                    </td>
                                 </tr>
                             );
                         })}
                     </tbody>
                 </Table>
-                <Button
-                    className="new_problem"
-                    onClick={() => navigate("/psetmaker")}
-                >
-                    Create New Problem Set
-                </Button>
             </div>
         );
     }

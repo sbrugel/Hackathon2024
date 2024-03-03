@@ -6,6 +6,7 @@ import config from "../config.json";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 
+import "./Login.css";
 import "../App.css";
 
 const Register = ({ setLoginUser }) => {
@@ -39,59 +40,64 @@ const Register = ({ setLoginUser }) => {
 
     return (
         <>
-            <h1>Login...</h1>
-            <p>
-                Don't have an account? <a href="/register">Register here!</a>
-            </p>
-            <Form>
-                <Form.Group>
-                    <Form.Control
-                        type="text"
-                        id="sign-in-name"
-                        name="name"
-                        value={user.name}
-                        onChange={handleChange}
-                        placeholder="Username"
-                        autocomplete="off"
-                        style={{
-                            width: "30%",
-                            textAlign: "center",
-                            fontSize: "25px",
-                            padding: "10px 20px",
-                            height: "20px"
-                        }}
-                    />
-                </Form.Group>
-                <Form.Group>
-                    <Form.Control
-                        type="password"
-                        id="sign-in-password"
-                        name="password"
-                        value={user.password}
-                        onChange={handleChange}
-                        placeholder="Password"
-                        style={{
-                            width: "30%",
-                            textAlign: "center",
-                            fontSize: "25px",
-                            padding: "10px 20px",
-                            height: "20px"
-                        }}
-                    />
-                </Form.Group>
-                <Form.Group>
-                    <Button
-                        type="submit"
-                        className="new_problem"
-                        onClick={(e) => {
-                            e.preventDefault();
-                            login();
-                        }}
-                    >
-                        Login
-                    </Button>
-                </Form.Group>
-            </Form>
+            <div className = "container">
+                <h2 className="login_header">Sign In</h2>
+                <p>Keep your personal records!</p>
+                <Form>
+                    <Form.Group>
+                        <Form.Control
+                            type="text"
+                            id="sign-in-name"
+                            name="name"
+                            value={user.name}
+                            onChange={handleChange}
+                            placeholder="Username"
+                            autocomplete="off"
+                            style={{
+                                marginTop:"10px",
+                                width: "50%",
+                                textAlign: "left",
+                                fontSize: "20px",
+                                padding: "10px 20px",
+                                height: "20px"
+                            }}
+                        />
+                    </Form.Group>
+                    <Form.Group>
+                        <Form.Control
+                            type="password"
+                            id="sign-in-password"
+                            name="password"
+                            value={user.password}
+                            onChange={handleChange}
+                            placeholder="Password"
+                            style={{
+                                marginTop:"10px",
+                                width: "50%",
+                                textAlign: "left",
+                                fontSize: "20px",
+                                padding: "10px 20px",
+                                height: "20px"
+                            }}
+                        />
+                    </Form.Group>
+                    <Form.Group>
+                        <Button
+                            type="submit"
+                            className="new_problem"
+                            onClick={(e) => {
+                                e.preventDefault();
+                                login();
+                            }}
+                        >
+                            Login
+                        </Button>
+                    </Form.Group>
+                </Form>
+                <p>
+                    Don't have an account? <a href="/register">Register here!</a>
+                </p>
+                </div>
         </>
     );
 };
