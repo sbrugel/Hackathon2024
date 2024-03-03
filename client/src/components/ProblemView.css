@@ -8,3 +8,23 @@
     width: 100px;
     height: 60px;
 }
+
+.new_problem {
+    display: block;
+    margin: 50px auto;
+    padding: 10px 20px;
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    text-decoration: none;
+    font-size: 18px;
+    border-radius: 11px;
+}
+
+.mainproblemview {
+    display: flex !important;
+    flex-direction: column; /* Add this line to stack items vertically */
+    justify-content: center !important;
+    align-items: center !important;
+    height: 100vh !important;
+}
