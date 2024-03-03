@@ -22,8 +22,7 @@ function App() {
                             user && user._id ? (
                                 <HomePage currentUser={user} />
                             ) : (
-                                //<Login setLoginUser={setLoginUser} />
-                                <Forum/>
+                                <Login setLoginUser={setLoginUser} />
                             )
                         }
                     />
