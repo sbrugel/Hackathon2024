@@ -40,7 +40,7 @@ const Register = ({ setLoginUser }) => {
 
     return (
         <>
-            <div className = "container">
+            <div className = "log_container">
                 <h2 className="login_header">Sign In</h2>
                 <p>Keep your personal records!</p>
                 <Form>
