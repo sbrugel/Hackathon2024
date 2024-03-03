@@ -118,6 +118,7 @@ function ProblemView({ currentUser }) {
                         We'll submit your results to the leaderboard now.
                     </p>
                     <Button
+                        className="new_problem"
                         onClick={async () => {
                             await axios
                                 .post(

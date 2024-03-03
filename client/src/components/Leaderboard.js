@@ -109,7 +109,9 @@ const Leaderboard = () => {
                         )}
                     </tbody>
                 </Table>
-                <Button onClick={() => navigate("/")}>Back</Button>
+                <Button className="new_problem" onClick={() => navigate("/")}>
+                    Back
+                </Button>
             </div>
         );
     }

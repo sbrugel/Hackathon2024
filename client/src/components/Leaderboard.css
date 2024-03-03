@@ -26,3 +26,14 @@
     margin: 70px;
     text-decoration: underline;
 }
+.new_problem {
+    display: block;
+    margin: 50px auto;
+    padding: 10px 20px;
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    text-decoration: none;
+    font-size: 18px;
+    border-radius: 11px;
+}

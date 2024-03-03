@@ -22,10 +22,9 @@ function HomePage({ currentUser }) {
         setSearchQuery(event.target.value);
     };
 
-    const filteredProblemSets = problemSets.filter(set => {
+    const filteredProblemSets = problemSets.filter((set) => {
         return set.name.toLowerCase().includes(searchQuery.toLowerCase());
     });
-
 
     // ...
     useEffect(() => {
@@ -53,7 +52,10 @@ function HomePage({ currentUser }) {
 
                 <h2 className="problems-header">Problem Sets</h2>
                 <div classname="search-bar">
-                    <input placeholder="Problem search..." onChange={handleSearchQueryChange}></input>
+                    <input
+                        placeholder="Problem search..."
+                        onChange={handleSearchQueryChange}
+                    ></input>
                 </div>
                 <Table striped bordered hover className="problem-set-table">
                     <thead>
@@ -105,7 +107,8 @@ function HomePage({ currentUser }) {
                                     </td>
                                     <td>{set.category}</td>
                                     <td>
-                                        <Button className="play-button"
+                                        <Button
+                                            className="play-button"
                                             variant="primary"
                                             onClick={() =>
                                                 navigate("/game/" + set.id)
@@ -115,7 +118,8 @@ function HomePage({ currentUser }) {
                                         </Button>
                                     </td>
                                     <td>
-                                        <Button className="leaderboard-button"
+                                        <Button
+                                            className="leaderboard-button"
                                             variant="primary"
                                             onClick={() =>
                                                 navigate(
@@ -128,7 +132,8 @@ function HomePage({ currentUser }) {
                                     </td>
                                     <td>
                                         {set.authorID === currentUser.id ? (
-                                            <Button className = "edit-button"
+                                            <Button
+                                                className="edit-button"
                                                 variant="primary"
                                                 onClick={() =>
                                                     navigate(
