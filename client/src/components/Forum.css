@@ -1,3 +1,4 @@
+.fixed-r,
 .textbox-container {
     position: fixed;
     top: 100;
@@ -6,17 +7,19 @@
     background-color: #f0f0f0;
     border: 1px solid #ccc;
     border-radius: 4px;
-  }
+    overflow-y: auto; /* Enable vertical scrolling */
+    max-height: 400px; /* Set a maximum height for the element */
+}
 
-  .message-list {
+.message-list {
     margin-bottom: 10px; /* Add margin at the bottom to separate the message list and text box */
-  }
-  
-  .message {
+}
+
+.message {
     margin-bottom: 8px; /* Add margin between individual messages */
     padding: 8px;
     background-color: #ffffff; /* Message box background color */
     border: 1px solid #ddd; /* Message box border */
     border-radius: 4px;
     word-wrap: break-word; /* Break words that exceed the container width */
-  }
+}
