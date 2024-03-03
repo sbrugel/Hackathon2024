@@ -54,6 +54,13 @@ function HomePage({ currentUser }) {
                 <div classname="search-bar">
                     <input
                         placeholder="Problem search..."
+                        style={{
+                            width: "30%",
+                            textAlign: "center",
+                            fontSize: "25px",
+                            padding: "10px 20px",
+                            height: "20px"
+                        }}
                         onChange={handleSearchQueryChange}
                     ></input>
                 </div>
