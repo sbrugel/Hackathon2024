@@ -78,14 +78,12 @@ function ProblemView({ currentUser }) {
         if (answer == problems[currentProblemIndex].answer) {
             playAudio(correct);
             setCurrentProblemIndex(currentProblemIndex + 1);
-
+            if (currentProblemIndex >= problems.length - 1) {
+                setFinalTime(elapsedTime);
+                setFinished(true);
+            }
         } else {
             playAudio(incorrect);
-        }
-        if (currentProblemIndex >= problems.length - 1) {
-            correct.play();
-            setFinalTime(elapsedTime);
-            setFinished(true);
         }
     };
 
