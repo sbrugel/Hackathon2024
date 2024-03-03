@@ -25,6 +25,19 @@ export function ProblemSetMaker({ currentUser, editMode }) {
         setQuestions([...questions, { problem, answer }]);
     }
 
+    // const handleSaveProblemSet = async () => {
+    //     // Validate that all required fields are filled
+    //     if (!name || !difficulty || questions.some((q) => !q.problem || !q.answer)) {
+    //       alert("Please fill in all required fields (Name, Difficulty, Problem, and Answer).");
+    //       return;
+    //     }
+    
+    //     // Save problem set logic...
+    //     await axios.post("http://localhost:" + config.PORT + "/newset", set).then(async (res) => {
+    //       // Additional logic...
+    //     });
+    //   };
+
     return (
         <div className="problem-set-maker">
             <h2>{editMode ? "Edit" : "Create"} a Problem Set</h2>
@@ -114,6 +127,8 @@ export function ProblemSetMaker({ currentUser, editMode }) {
                     width: "35%"
                 }}
                 onClick={async () => {
+                    if (name && difficulty && questions.some((q) => q.problem && q.answer)) {
+
                     let id = -1;
                     const set = {
                         name,
@@ -147,6 +162,9 @@ export function ProblemSetMaker({ currentUser, editMode }) {
                                 })
                             );
                         });
+                    } else {
+                        alert("Missing a field");
+                    }
                 }}
             >
                 Save Problem Set
