@@ -16,6 +16,17 @@ function HomePage({ currentUser }) {
     const navigate = useNavigate();
     const [problemSets, setProblemSets] = useState([]);
     const [users, setUsers] = useState([]);
+    const [searchQuery, setSearchQuery] = useState("");
+
+    const handleSearchQueryChange = (event) => {
+        setSearchQuery(event.target.value);
+    };
+
+    const filteredProblemSets = problemSets.filter(set => {
+        return set.name.toLowerCase().includes(searchQuery.toLowerCase());
+    });
+
+
     // ...
     useEffect(() => {
         axios
@@ -42,7 +53,7 @@ function HomePage({ currentUser }) {
 
                 <h2 className="problems-header">Problem Sets</h2>
                 <div classname="search-bar">
-                    <input placeholder="Problem search..."></input>
+                    <input placeholder="Problem search..." onChange={handleSearchQueryChange}></input>
                 </div>
                 <Table striped bordered hover className="problem-set-table">
                     <thead>
@@ -56,7 +67,7 @@ function HomePage({ currentUser }) {
                         </tr>
                     </thead>
                     <tbody>
-                        {problemSets.map((set) => {
+                        {filteredProblemSets.map((set) => {
                             return (
                                 <tr>
                                     <td>{set.name}</td>
