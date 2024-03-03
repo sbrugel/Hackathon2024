@@ -7,6 +7,9 @@ import config from "../config"; // Import the 'config' module
 import axios from "axios"; // Import the 'axios' module
 import { Button } from "react-bootstrap";
 import Confetti from "react-confetti";
+const checkerFlag = require("../assets/flag.gif");
+const correct = new Audio(require("../assets/correct.mp3"));
+const incorrect = new Audio(require("../assets/incorrect.mp3"));
 
 function ProblemView({ currentUser }) {
     const navigate = useNavigate();
@@ -63,9 +66,14 @@ function ProblemView({ currentUser }) {
         setUserAnswer("");
         // eslint-disable-next-line eqeqeq
         if (answer == problems[currentProblemIndex].answer) {
+            correct.play();
             setCurrentProblemIndex(currentProblemIndex + 1);
+
+        } else {
+            incorrect.play();
         }
         if (currentProblemIndex >= problems.length - 1) {
+            correct.play();
             setFinalTime(elapsedTime);
             setFinished(true);
         }
@@ -126,7 +134,8 @@ function ProblemView({ currentUser }) {
                 <div className="mainproblemview">
                     <div className = "problem_container">
                         <Confetti width={width} height={height} />
-                        <h1 style={{marginBottom:"100px"}}>Well done!</h1>
+                        <h1 style={{marginBottom:"25px"}}>Well done!</h1>
+                        <img src={checkerFlag} alt="checkered flag" />
                         <p>
                             You completed the problem set in {finalTime} seconds.
                         </p>
