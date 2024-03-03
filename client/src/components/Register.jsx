@@ -40,7 +40,7 @@ const Register = () => {
         <>
             <h1>Create a new account...</h1>
             <p>
-                Already have one? <a href="/login">Login here!</a>
+                Already have one? <a href="/">Login here!</a>
             </p>
             <Form>
                 <Form.Group>

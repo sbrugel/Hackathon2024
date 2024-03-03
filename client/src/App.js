@@ -7,6 +7,7 @@ import Login from "./components/Login";
 import HomePage from "./components/HomePage";
 import Leaderboard from "./components/Leaderboard";
 import { ProblemSetMaker } from "./components/ProblemSetMaker";
+import ProblemView from "./components/ProblemView";
 
 function App() {
     const [user, setLoginUser] = useState({});
@@ -20,6 +21,16 @@ function App() {
                         element={
                             user && user._id ? (
                                 <HomePage currentUser={user} />
+                            ) : (
+                                <Login setLoginUser={setLoginUser} />
+                            )
+                        }
+                    />
+                    <Route
+                        path="/game/:id"
+                        element={
+                            user && user._id ? (
+                                <ProblemView currentUser={user} />
                             ) : (
                                 <Login setLoginUser={setLoginUser} />
                             )

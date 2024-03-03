@@ -240,35 +240,35 @@ app.get("/problemsets/:i", (req, res) => {
 app.post("/newproblem", async (req, res) => {
     const { body, answer, setID } = req.body;
 
-    let problemID = 0;
-    let foundNewID = false; // TODO: this is inefficient as shit lol
-    do {
-        problemID++;
-        await Problem.findOne({ id: problemID })
-            .exec()
-            .then((problem) => {
-                if (!problem) foundNewID = true;
-            });
-    } while (!foundNewID);
+    let problemID = Math.floor(Math.random() * 10000000);
 
     const problem = new Problem({ id: problemID, body, answer });
+
     problem
         .save()
         .then(() => {
-            ProblemSet.findOne({ id: setID })
-                .exec()
-                .then((problemSet) => {
-                    problemSet.problemIDs = [
-                        ...problemSet.problemIDs,
-                        problemID
-                    ];
-                    problemSet.save().then(() => {
-                        res.send({ message: "Problem saved!" });
-                    });
-                });
+            return ProblemSet.findOne({ id: setID }).exec();
+        })
+        .then((problemSet) => {
+            if (!problemSet) {
+                throw new Error("ProblemSet not found");
+            }
+            problemSet.problemIDs.push(problemID);
+            return problemSet.save();
+        })
+        .then(() => {
+            res.send({ message: "Problem saved!" });
         })
         .catch((err) => {
             res.send("ERROR: " + err);
+        });
+});
+
+app.get("/problems", (req, res) => {
+    Problem.find()
+        .exec()
+        .then((problems) => {
+            res.json(problems);
         });
 });
 
@@ -286,7 +286,7 @@ app.get("/problems/:i", (req, res) => {
 - get by ID
 */
 app.post("/newleaderboardentry", async (req, res) => {
-    const { userId, score, time, leaderboardID } = req.body;
+    const { userId, time, leaderboardID } = req.body;
 
     let entryID = 0;
     let foundNewID = false; // TODO: this is inefficient as shit lol
@@ -299,14 +299,14 @@ app.post("/newleaderboardentry", async (req, res) => {
             });
     } while (!foundNewID);
 
-    const entry = new LeaderboardEntry({ id: entryID, userId, score, time });
+    const entry = new LeaderboardEntry({ id: entryID, userId, score: 0, time });
     entry
         .save()
         .then(() => {
             Leaderboard.findOne({ id: leaderboardID })
                 .exec()
                 .then((leaderboard) => {
-                    leaderboard.entryIDs = [...leaderboard.entryIDs, entryID];
+                    leaderboard.entryIDs.push(entryID);
                     leaderboard.save().then(() => {
                         res.send({ message: "Leaderboard entry saved!" });
                     });
