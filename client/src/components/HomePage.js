@@ -67,18 +67,20 @@ function HomePage({ currentUser }) {
                         onChange={handleSearchQueryChange}
                     ></input>
                 </div>
-                <Button
-                    className="new_problem"
-                    onClick={() => navigate("/psetmaker")}
-                >
-                    Create New Problem Set
-                </Button>
-                <Button
-                    className="new_problem"
-                    onClick={() => navigate("/forum")}
-                >
-                    Tutoring Forums
-                </Button>
+                <div className="button-container">
+                    <Button
+                        className="new_problem"
+                        onClick={() => navigate("/psetmaker")}
+                    >
+                        Create New Problem Set
+                    </Button>
+                    <Button
+                        className="new_problem"
+                        onClick={() => navigate("/forum")}
+                    >
+                        Tutoring Forums
+                    </Button>
+                </div>
                 <Table striped bordered hover className="problem-set-table">
                     <thead>
                         <tr>
