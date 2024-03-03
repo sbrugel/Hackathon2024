@@ -103,12 +103,19 @@ function ProblemView({ currentUser }) {
                                 : "..."}
                         </h1>
                         <form onSubmit={handleAnswerSubmit}>
-                            <input
-                                type="number"
-                                value={userAnswer}
-                                onChange={(e) => setUserAnswer(e.target.value)}
-                            />
-                            <p>Press Enter to Submit</p>
+                        <input
+                            type="number"
+                            value={userAnswer}
+                            style={{
+                                width: "30%",
+                                textAlign: "center",
+                                fontSize: "25px",
+                                padding: "10px 20px",
+                                height: "20px"
+                            }}
+                            onChange={(e) => setUserAnswer(e.target.value)}
+                        />
+                        <p>Press Enter to Submit</p>
                         </form>
                         <p>Time: {formatTime(elapsedTime)}</p>
                     </div>

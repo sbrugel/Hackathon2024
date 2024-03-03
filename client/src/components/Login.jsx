@@ -30,9 +30,7 @@ const Register = ({ setLoginUser }) => {
             axios
                 .post("http://localhost:" + config.PORT + "/login", user)
                 .then((res) => {
-                    alert(res.data.message + " " + config.PORT);
                     setLoginUser(res.data.user);
-                    // TODO: navigate("/");
                 });
         } else {
             alert("Missing a field!");
@@ -55,6 +53,13 @@ const Register = ({ setLoginUser }) => {
                         onChange={handleChange}
                         placeholder="Username"
                         autocomplete="off"
+                        style={{
+                            width: "30%",
+                            textAlign: "center",
+                            fontSize: "25px",
+                            padding: "10px 20px",
+                            height: "20px"
+                        }}
                     />
                 </Form.Group>
                 <Form.Group>
@@ -65,11 +70,19 @@ const Register = ({ setLoginUser }) => {
                         value={user.password}
                         onChange={handleChange}
                         placeholder="Password"
+                        style={{
+                            width: "30%",
+                            textAlign: "center",
+                            fontSize: "25px",
+                            padding: "10px 20px",
+                            height: "20px"
+                        }}
                     />
                 </Form.Group>
                 <Form.Group>
                     <Button
                         type="submit"
+                        className="new_problem"
                         onClick={(e) => {
                             e.preventDefault();
                             login();
