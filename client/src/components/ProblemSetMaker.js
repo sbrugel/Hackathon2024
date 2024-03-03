@@ -35,19 +35,33 @@ export function ProblemSetMaker({ currentUser, editMode }) {
                     type="text"
                     value={name}
                     onChange={handleNameChange}
-                    style={{ width: "60%", textAlign: "center", fontSize: "25px", margin: "0 auto", padding: "10px 20px", height: "20px"}}
+                    style={{
+                        width: "60%",
+                        textAlign: "center",
+                        fontSize: "25px",
+                        margin: "0 auto",
+                        padding: "10px 20px",
+                        height: "20px"
+                    }}
                 />
             </Form.Group>
             <br />
             <Form.Group controlId="difficulty">
-                <Form.Label className ="label">Difficulty</Form.Label>
+                <Form.Label className="label">Grade Level</Form.Label>
                 <br />
                 <Form.Control
                     as="select"
                     value={difficulty}
                     onChange={handleDifficultyChange}
-                style={{ width: "60%", textAlign: "center", fontSize: "15px", margin: "0 auto", padding: "10px 20px", borderRadius: "10px", height: "50px"}}
-
+                    style={{
+                        width: "60%",
+                        textAlign: "center",
+                        fontSize: "15px",
+                        margin: "0 auto",
+                        padding: "10px 20px",
+                        borderRadius: "10px",
+                        height: "50px"
+                    }}
                 >
                     <option value="">Select Difficulty...</option>
                     <option value="1st Grade">1st Grade</option>
@@ -64,11 +78,11 @@ export function ProblemSetMaker({ currentUser, editMode }) {
                     <option value="12th Grade">12th Grade</option>
                 </Form.Control>
             </Form.Group>
-            
+
             <div>
                 <SubmitProblem addQuestion={handleAddQuestion} />
             </div>
-            
+
             <h3>Questions In Set</h3>
             <Table striped bordered hover>
                 <thead>
@@ -84,20 +98,21 @@ export function ProblemSetMaker({ currentUser, editMode }) {
                     ))}
                 </tbody>
             </Table>
-            <Button style={{
-                display: "block",
-                margin: "0 auto",
-                padding: "10px 20px",
-                backgroundColor: "#0ca002",
-                color: "#fff",
-                textAlign: "center",
-                fontSize: "18px",
-                borderRadius: "11px",
-                transition: "background-color 0.3s ease",
-                outline: "none",
-                justifyContent: "center",
-                width: "35%"
-            }} 
+            <Button
+                style={{
+                    display: "block",
+                    margin: "0 auto",
+                    padding: "10px 20px",
+                    backgroundColor: "#0ca002",
+                    color: "#fff",
+                    textAlign: "center",
+                    fontSize: "18px",
+                    borderRadius: "11px",
+                    transition: "background-color 0.3s ease",
+                    outline: "none",
+                    justifyContent: "center",
+                    width: "35%"
+                }}
                 onClick={async () => {
                     let id = -1;
                     const set = {
