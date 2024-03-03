@@ -39,7 +39,7 @@ const Register = () => {
 
     return (
         <>
-            <div className = "container">
+            <div className = "reg_container">
                 <h1 className= "register_header">Create a new account!</h1>
                 <Form>
                     <Form.Group>
