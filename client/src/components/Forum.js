@@ -77,21 +77,6 @@ const Forum = ({ currentUser }) => {
         return (
             <div>
                 <h1>Welcome to the Tutoring Forum, {currentUser.name}!</h1>
-                <Button
-                    className="new_problem"
-                    variant="primary"
-                    onClick={() =>
-                        axios.post(
-                            "http://localhost:" + config.PORT + "/topic",
-                            {
-                                originalAuthorID: currentUser.id,
-                                title: "Need Help on Algebra Set!"
-                            }
-                        )
-                    }
-                >
-                    New Topic
-                </Button>
                 {activeTopic ? (
                     <TextBox
                         messages={activeTopic.postIDs || []}
@@ -107,7 +92,7 @@ const Forum = ({ currentUser }) => {
                     />
                 ) : null}
                 {topics.map((topic) => (
-                    <div key={topic.id}>
+                    <div key={topic.id} className="post-container">
                         <h2>{topic.title}</h2>
                         <p>
                             <em>
@@ -155,7 +140,23 @@ const Forum = ({ currentUser }) => {
                         </Button>
                     </div>
                 ))}
+                <Button
+                    className="new_problem"
+                    variant="primary"
+                    onClick={() =>
+                        axios.post(
+                            "http://localhost:" + config.PORT + "/topic",
+                            {
+                                originalAuthorID: currentUser.id,
+                                title: "Need Help on Algebra Set!"
+                            }
+                        )
+                    }
+                >
+                    New Topic
+                </Button>
             </div>
+            
         );
     }
 };
