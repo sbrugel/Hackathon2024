@@ -7,6 +7,8 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import "./HomePage.css";
 
+const logo = require("../assets/LOGO.png");
+
 function HomePage({ currentUser }) {
     const navigate = useNavigate();
     const [problemSets, setProblemSets] = useState([]);
@@ -42,7 +44,13 @@ function HomePage({ currentUser }) {
         return (
             <div classname="homepage">
                 <div className="welcome-back">
-                    <h1>Welcome back, {currentUser.name}!</h1>
+                    <img
+                        src={logo}
+                        alt="logo"
+                        className="logo"
+                        style={{ width: "100%" }}
+                    />
+                    <h3>Welcome back, {currentUser.name}!</h3>
                 </div>
 
                 <h2 className="problems-header">Problem Sets</h2>

@@ -8,6 +8,8 @@ import Form from "react-bootstrap/Form";
 import "../App.css";
 import "./Register.css";
 
+const logo = require("../assets/LOGO.png");
+
 const Register = () => {
     const [user, setUser] = useState({
         name: "",
@@ -39,8 +41,14 @@ const Register = () => {
 
     return (
         <>
-            <div className = "reg_container">
-                <h1 className= "register_header">Create a new account!</h1>
+            <div className="reg_container">
+                <img
+                    src={logo}
+                    alt="logo"
+                    className="logo"
+                    style={{ width: "100%" }}
+                />
+                <h1 className="register_header">Create a new account!</h1>
                 <Form>
                     <Form.Group>
                         <Form.Control
@@ -52,7 +60,7 @@ const Register = () => {
                             autocomplete="off"
                             placeholder="Username"
                             style={{
-                                marginTop:"40px",
+                                marginTop: "40px",
                                 width: "50%",
                                 textAlign: "left",
                                 fontSize: "20px",
@@ -70,7 +78,7 @@ const Register = () => {
                             onChange={handleChange}
                             placeholder="Password"
                             style={{
-                                marginTop:"10px",
+                                marginTop: "10px",
                                 width: "50%",
                                 textAlign: "left",
                                 fontSize: "20px",

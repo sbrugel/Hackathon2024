@@ -9,6 +9,8 @@ import Form from "react-bootstrap/Form";
 import "./Login.css";
 import "../App.css";
 
+const logo = require("../assets/LOGO.png");
+
 const Register = ({ setLoginUser }) => {
     const navigate = useNavigate();
 
@@ -40,7 +42,13 @@ const Register = ({ setLoginUser }) => {
 
     return (
         <>
-            <div className = "log_container">
+            <div className="log_container">
+                <img
+                    src={logo}
+                    alt="logo"
+                    className="logo"
+                    style={{ width: "100%" }}
+                />
                 <h2 className="login_header">Sign In</h2>
                 <p>Keep your personal records!</p>
                 <Form>
@@ -54,7 +62,7 @@ const Register = ({ setLoginUser }) => {
                             placeholder="Username"
                             autocomplete="off"
                             style={{
-                                marginTop:"10px",
+                                marginTop: "10px",
                                 width: "50%",
                                 textAlign: "left",
                                 fontSize: "20px",
@@ -72,7 +80,7 @@ const Register = ({ setLoginUser }) => {
                             onChange={handleChange}
                             placeholder="Password"
                             style={{
-                                marginTop:"10px",
+                                marginTop: "10px",
                                 width: "50%",
                                 textAlign: "left",
                                 fontSize: "20px",
@@ -95,9 +103,10 @@ const Register = ({ setLoginUser }) => {
                     </Form.Group>
                 </Form>
                 <p>
-                    Don't have an account? <a href="/register">Register here!</a>
+                    Don't have an account?{" "}
+                    <a href="/register">Register here!</a>
                 </p>
-                </div>
+            </div>
         </>
     );
 };
