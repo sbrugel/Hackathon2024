@@ -72,7 +72,6 @@ function HomePage({ currentUser }) {
                             <th>Grade Level</th>
                             <th></th>
                             <th></th>
-                            <th></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -136,21 +135,6 @@ function HomePage({ currentUser }) {
                                         >
                                             Leaderboard
                                         </Button>
-                                    </td>
-                                    <td>
-                                        {set.authorID === currentUser.id ? (
-                                            <Button
-                                                className="edit-button"
-                                                variant="primary"
-                                                onClick={() =>
-                                                    navigate(
-                                                        "/leaderboard/" + set.id
-                                                    )
-                                                }
-                                            >
-                                                Edit
-                                            </Button>
-                                        ) : null}
                                     </td>
                                 </tr>
                             );
