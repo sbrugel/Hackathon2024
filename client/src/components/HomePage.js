@@ -69,7 +69,7 @@ function HomePage({ currentUser }) {
                         <tr>
                             <th>Name</th>
                             <th>Creator</th>
-                            <th>Difficulty</th>
+                            <th>Grade Level</th>
                             <th></th>
                             <th></th>
                             <th></th>

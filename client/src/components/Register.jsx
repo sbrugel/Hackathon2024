@@ -52,6 +52,13 @@ const Register = () => {
                         onChange={handleChange}
                         autocomplete="off"
                         placeholder="Username"
+                        style={{
+                            width: "30%",
+                            textAlign: "center",
+                            fontSize: "25px",
+                            padding: "10px 20px",
+                            height: "20px"
+                        }}
                     />
                 </Form.Group>
                 <Form.Group>
@@ -62,15 +69,25 @@ const Register = () => {
                         value={user.password}
                         onChange={handleChange}
                         placeholder="Password"
+                        style={{
+                            width: "30%",
+                            textAlign: "center",
+                            fontSize: "25px",
+                            padding: "10px 20px",
+                            height: "20px"
+                        }}
                     />
                 </Form.Group>
                 <Form.Group>
-                    <Button type="submit" onClick={register}>
+                    <Button
+                        type="submit"
+                        className="new_problem"
+                        onClick={register}
+                    >
                         Register
                     </Button>
                 </Form.Group>
             </Form>
-            <Button onClick={register}>OK</Button>
         </>
     );
 };
