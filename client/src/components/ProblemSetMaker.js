@@ -91,27 +91,28 @@ export function ProblemSetMaker({ currentUser, editMode }) {
                             "http://localhost:" + config.PORT + "/newset",
                             set
                         )
-                        .then((res) => {
+                        .then(async (res) => {
                             id = res.data.id;
+                            await Promise.all(
+                                questions.map(async (question) => {
+                                    await axios
+                                        .post(
+                                            "http://localhost:" +
+                                                config.PORT +
+                                                "/newproblem",
+                                            {
+                                                body: question.problem,
+                                                answer: question.answer,
+                                                setID: id
+                                            }
+                                        )
+                                        .then((res) => {
+                                            console.log(res.data.message);
+                                            navigate("/");
+                                        });
+                                })
+                            );
                         });
-
-                    questions.forEach((question) => {
-                        axios
-                            .post(
-                                "http://localhost:" +
-                                    config.PORT +
-                                    "/newproblem",
-                                {
-                                    problem: question.problem,
-                                    answer: question.answer,
-                                    setID: id
-                                }
-                            )
-                            .then((res) => {
-                                console.log(res.data.message);
-                                navigate("/");
-                            });
-                    });
                 }}
             >
                 Save Problem Set

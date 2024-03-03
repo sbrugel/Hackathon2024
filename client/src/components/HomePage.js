@@ -96,7 +96,9 @@ function HomePage({ currentUser }) {
                                     <td>
                                         <Button
                                             variant="primary"
-                                            onClick={() => handleButtonClick(0)}
+                                            onClick={() =>
+                                                navigate("/game/" + set.id)
+                                            }
                                         >
                                             Play
                                         </Button>
