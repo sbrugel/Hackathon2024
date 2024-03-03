@@ -23,8 +23,15 @@
 
 .mainproblemview {
     display: flex !important;
-    flex-direction: column; /* Add this line to stack items vertically */
+    flex-direction: column;
     justify-content: center !important;
     align-items: center !important;
     height: 100vh !important;
+}
+
+.container{
+    background-color: white;
+    border-radius: 20px;
+    outline: 2px solid black;
+    padding: 70px;
 }
