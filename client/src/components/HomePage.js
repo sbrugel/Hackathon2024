@@ -7,11 +7,6 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import "./HomePage.css";
 
-const handleButtonClick = (rowIndex) => {
-    // Handle button click for the specific row (index) here
-    console.log(`Button clicked for Row ${rowIndex + 1}`);
-};
-
 function HomePage({ currentUser }) {
     const navigate = useNavigate();
     const [problemSets, setProblemSets] = useState([]);
@@ -69,6 +64,12 @@ function HomePage({ currentUser }) {
                     onClick={() => navigate("/psetmaker")}
                 >
                     Create New Problem Set
+                </Button>
+                <Button
+                    className="new_problem"
+                    onClick={() => navigate("/forum")}
+                >
+                    Tutoring Forums
                 </Button>
                 <Table striped bordered hover className="problem-set-table">
                     <thead>
